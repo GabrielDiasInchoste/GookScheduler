@@ -1,0 +1,85 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:1.5.21"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.5.4"
+    }
+}
+
+plugins {
+    id "org.springframework.boot" version "2.5.4"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id "org.jetbrains.kotlin.jvm" version "1.5.21"
+
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+bootJar {
+    enabled = false
+    archivesBaseName = "gook-user"
+    archiveVersion = "0.0.1-SNAPSHOT"
+
+}
+java.sourceCompatibility = JavaVersion.VERSION_11
+subprojects {
+
+    group = "com.br.gook"
+    version = "0.0.1-SNAPSHOT"
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    apply plugin: "kotlin"
+    apply plugin: "kotlin-spring"
+
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+    }
+
+    dependencies {
+        implementation "org.springframework.boot:spring-boot-starter-actuator:2.5.4"
+        implementation "org.springframework.boot:spring-boot-starter-batch:2.5.4"
+        implementation "org.springframework.boot:spring-boot-starter-data-jpa:2.5.4"
+        implementation "org.springframework.boot:spring-boot-starter-integration:2.5.4"
+        implementation "org.springframework.boot:spring-boot-starter-security:2.5.4"
+        implementation "org.springframework.boot:spring-boot-starter-web:2.5.4"
+        implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5"
+        implementation "org.flywaydb:flyway-core:7.14.1"
+        implementation "org.jetbrains.kotlin:kotlin-reflect"
+        implementation 'org.glassfish.jaxb:jaxb-runtime'
+        implementation "io.springfox:springfox-swagger2:2.9.2"
+        implementation "io.springfox:springfox-swagger-ui:2.9.2"
+
+        implementation "com.h2database:h2:1.4.200"
+
+        testImplementation "org.springframework.boot:spring-boot-starter-test:2.5.4"
+        testImplementation "io.mockk:mockk:1.12.0"
+        testImplementation "io.kotest:kotest-assertions-core-jvm:4.6.2"
+        testImplementation "io.kotest:kotest-runner-junit5-jvm:4.6.2"
+        testImplementation "io.kotest:kotest-property-jvm:4.6.2"
+        testImplementation "io.kotest:kotest-extensions-spring:4.4.3"
+        testImplementation "com.ninja-squad:springmockk:3.0.1"
+    }
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = "11"
+
+    }
+
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "11"
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
