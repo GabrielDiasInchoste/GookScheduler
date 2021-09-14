@@ -1,0 +1,3 @@
+dependencies {
+    implementation project(":use-cases:use-case-port")
+}
