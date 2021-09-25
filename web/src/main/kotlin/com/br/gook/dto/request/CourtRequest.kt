@@ -1,9 +1,8 @@
-package com.br.gook.data
+package com.br.gook.dto.request
 
 import java.time.LocalDateTime
 
-data class CourtPort(
-    val id: Int?,
+data class CourtRequest(
     val name: String,
     val type: String,
     val description: String,

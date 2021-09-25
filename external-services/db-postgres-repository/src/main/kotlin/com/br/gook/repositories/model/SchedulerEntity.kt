@@ -21,10 +21,10 @@ data class SchedulerEntity(
 
     @OneToOne
     @Column(name = "CANCEL")
-    val cancel: CancelEntity,
+    val cancel: CancelEntity?,
 
-    @Column(name = "REQUEST_DATE")
-    val requestDate: LocalDateTime,
+    @Column(name = "SCHEDULE")
+    val schedule: LocalDateTime,
 
     @Column(name = "CONFIRM_DATE")
     val confirmDate: LocalDateTime,

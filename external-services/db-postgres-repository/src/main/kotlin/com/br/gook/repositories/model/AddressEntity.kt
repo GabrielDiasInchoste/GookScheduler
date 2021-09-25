@@ -24,9 +24,6 @@ data class AddressEntity(
     @Column(name = "CEP")
     val cep: String,
 
-    @Column(name = "CONFIRM_DATE")
-    val confirmDate: LocalDateTime,
-
     @Column(name = "CREATE_DATE")
     val createDate: LocalDateTime,
 

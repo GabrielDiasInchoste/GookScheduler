@@ -1,55 +1,57 @@
-package com.br.gook.repositories.mapper
+package com.br.gook.dto.mapper
 
 import com.br.gook.data.*
-import com.br.gook.repositories.model.*
+import com.br.gook.dto.request.AddressRequest
+import com.br.gook.dto.request.CancelRequest
+import com.br.gook.dto.request.CourtRequest
+import com.br.gook.dto.request.LocalRequest
+import com.br.gook.dto.response.*
 
-fun AddressPort.toEntity(): AddressEntity {
-    return AddressEntity(
-        id = id,
+fun AddressPort.toResponse(): AddressResponse {
+    return AddressResponse(
+        id = id!!,
         name = name,
         number = number,
         description = description,
         cep = cep,
-        confirmDate = confirmDate,
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
 }
 
-fun AddressEntity.toPort(): AddressPort {
+fun AddressRequest.toPort(): AddressPort {
     return AddressPort(
-        id = id,
+        id = null,
         name = name,
         number = number,
         description = description,
         cep = cep,
-        confirmDate = confirmDate,
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
 }
 
-fun CancelPort.toEntity(): CancelEntity {
-    return CancelEntity(
-        id = id,
+fun CancelPort.toResponse(): CancelResponse {
+    return CancelResponse(
+        id = id!!,
         description = description,
         cancelRequestedDate = cancelRequestedDate,
         cancelConfirmedDate = cancelConfirmedDate
     )
 }
 
-fun CancelEntity.toPort(): CancelPort {
+fun CancelRequest.toPort(): CancelPort {
     return CancelPort(
-        id = id,
+        id = null,
         description = description,
         cancelRequestedDate = cancelRequestedDate,
         cancelConfirmedDate = cancelConfirmedDate
     )
 }
 
-fun CourtPort.toEntity(): CourtEntity {
-    return CourtEntity(
-        id = id,
+fun CourtPort.toResponse(): CourtResponse {
+    return CourtResponse(
+        id = id!!,
         name = name,
         type = type,
         description = description,
@@ -58,9 +60,9 @@ fun CourtPort.toEntity(): CourtEntity {
     )
 }
 
-fun CourtEntity.toPort(): CourtPort {
+fun CourtRequest.toPort(): CourtPort {
     return CourtPort(
-        id = id,
+        id = null,
         name = name,
         type = type,
         description = description,
@@ -69,20 +71,20 @@ fun CourtEntity.toPort(): CourtPort {
     )
 }
 
-fun LocalPort.toEntity(): LocalEntity {
-    return LocalEntity(
-        id = id,
+fun LocalPort.toResponse(): LocalResponse {
+    return LocalResponse(
+        id = id!!,
         name = name,
-        address = address.toEntity(),
-        courts = courts.map { it.toEntity() },
+        address = address.toResponse(),
+        courts = courts.map { it.toResponse() },
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
 }
 
-fun LocalEntity.toPort(): LocalPort {
+fun LocalRequest.toPort(): LocalPort {
     return LocalPort(
-        id = id,
+        id = null,
         name = name,
         address = address.toPort(),
         courts = courts.map { it.toPort() },
@@ -91,28 +93,28 @@ fun LocalEntity.toPort(): LocalPort {
     )
 }
 
-fun SchedulerPort.toEntity(): SchedulerEntity {
-    return SchedulerEntity(
-        id = id,
+fun SchedulerPort.toResponse(): SchedulerResponse {
+    return SchedulerResponse(
+        id = id!!,
         customerId = customerId,
-        court = court.toEntity(),
-        cancel = cancel.toEntity(),
-        requestDate = requestDate,
+        local = local!!.toResponse(),
+        cancel = cancel?.toResponse(),
+        schedule = schedule,
         confirmDate = confirmDate,
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
 }
 
-fun SchedulerEntity.toPort(): SchedulerPort {
-    return SchedulerPort(
-        id = id,
-        customerId = customerId,
-        court = court.toPort(),
-        cancel = cancel.toPort(),
-        requestDate = requestDate,
-        confirmDate = confirmDate,
-        createDate = createDate,
-        lasModifiedDate = lasModifiedDate
-    )
-}
+//fun SchedulerRequest.toPort(): SchedulerPort {
+//    return SchedulerPort(
+//        id = null,
+//        customerId = customerId,
+//        local = local.toPort(),
+//        cancel = cancel?.toPort(),
+//        schedule = schedule,
+//        confirmDate = confirmDate,
+//        createDate = createDate,
+//        lasModifiedDate = lasModifiedDate
+//    )
+
