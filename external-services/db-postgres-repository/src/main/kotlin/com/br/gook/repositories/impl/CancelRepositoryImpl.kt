@@ -23,12 +23,12 @@ class CancelRepositoryImpl(
         return cancelRepository.save(cancelPort.toEntity()).toPort()
     }
 
-    override fun findCancelByIdOrThrow(cancelId: Int): CancelOutputPort {
+    override fun findCancelByIdOrThrow(cancelId: Long): CancelOutputPort {
         return cancelRepository.findById(cancelId).takeIf { it.isPresent }?.get()?.toPort()
             ?: throw Exception("CancelRepositoryImpl.findCancelByIdOrThrow - Error to find Cancel - cancelId: $cancelId")
     }
 
-    override fun deleteCancel(cancelId: Int) {
+    override fun deleteCancel(cancelId: Long) {
         val cancelPort = findCancelByIdOrThrow(cancelId)
         cancelRepository.delete(cancelPort.toEntity())
     }

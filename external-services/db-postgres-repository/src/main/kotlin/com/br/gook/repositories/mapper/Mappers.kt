@@ -5,7 +5,6 @@ import com.br.gook.repositories.model.*
 
 fun AddressOutputPort.toEntity(): AddressEntity {
     return AddressEntity(
-        id = id!!,
         name = name,
         number = number,
         description = description,
@@ -29,7 +28,6 @@ fun AddressEntity.toPort(): AddressOutputPort {
 
 fun CancelOutputPort.toEntity(): CancelEntity {
     return CancelEntity(
-        id = id!!,
         description = description,
         cancelRequestedDate = cancelRequestedDate,
         cancelConfirmedDate = cancelConfirmedDate
@@ -47,7 +45,6 @@ fun CancelEntity.toPort(): CancelOutputPort {
 
 fun CourtOutputPort.toEntity(): CourtEntity {
     return CourtEntity(
-        id = id!!,
         name = name,
         type = type,
         description = description,
@@ -69,7 +66,6 @@ fun CourtEntity.toPort(): CourtOutputPort {
 
 fun LocalOutputPort.toEntity(): LocalEntity {
     return LocalEntity(
-        id = id!!,
         name = name,
         address = address.toEntity(),
         courts = courts.map { it.toEntity() },
@@ -91,7 +87,6 @@ fun LocalEntity.toPort(): LocalOutputPort {
 
 fun SchedulerOutputPort.toEntity(): SchedulerEntity {
     return SchedulerEntity(
-        id = id,
         customerId = customerId,
         court = court.toEntity(),
         cancel = cancel?.toEntity(),

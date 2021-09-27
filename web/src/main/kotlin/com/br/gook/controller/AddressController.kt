@@ -3,6 +3,7 @@ package com.br.gook.controller
 import com.br.gook.dto.mapper.toPort
 import com.br.gook.dto.mapper.toResponse
 import com.br.gook.dto.request.AddressRequest
+import com.br.gook.dto.request.UpdateAddressRequest
 import com.br.gook.dto.response.AddressResponse
 import com.br.gook.port.input.AddressUseCaseInput
 import org.springframework.http.HttpStatus
@@ -19,7 +20,7 @@ class AddressController(
 
     @GetMapping(value = ["{addressId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getProduct(
-        @PathVariable(value = "addressId") addressId: Int
+        @PathVariable(value = "addressId") addressId: Long
     ): ResponseEntity<AddressResponse> {
         return ResponseEntity.status(HttpStatus.OK)
             .contentType(MediaType.APPLICATION_JSON)
@@ -37,17 +38,17 @@ class AddressController(
 
     @PutMapping(value = ["{addressId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun putProduct(
-        @PathVariable(value = "addressId") addressId: Int,
-        @RequestBody @Valid addressRequest: AddressRequest
+        @PathVariable(value = "addressId") addressId: Long,
+        @RequestBody @Valid updateAddressRequest: UpdateAddressRequest
     ): ResponseEntity<AddressResponse> {
         return ResponseEntity.status(HttpStatus.OK)
             .contentType(MediaType.APPLICATION_JSON)
-            .body(addressUseCaseInput.updateAddress(addressId, addressRequest.toPort()).toResponse())
+            .body(addressUseCaseInput.updateAddress(addressId, updateAddressRequest.toPort()).toResponse())
     }
 
     @DeleteMapping(value = ["{addressId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun deleteProduct(
-        @PathVariable(value = "addressId") addressId: Int
+        @PathVariable(value = "addressId") addressId: Long
     ): ResponseEntity<Void> {
         addressUseCaseInput.deleteAddress(addressId)
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()

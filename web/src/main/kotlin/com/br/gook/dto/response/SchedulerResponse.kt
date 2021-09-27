@@ -3,7 +3,7 @@ package com.br.gook.dto.response
 import java.time.LocalDateTime
 
 data class SchedulerResponse(
-    val id: Int,
+    val id: Long,
     val customerId: String,
     val court: CourtResponse,
     val cancel: CancelResponse?,

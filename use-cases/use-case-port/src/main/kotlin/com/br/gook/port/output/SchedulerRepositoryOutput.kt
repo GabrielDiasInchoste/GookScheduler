@@ -4,9 +4,9 @@ import com.br.gook.data.output.SchedulerOutputPort
 
 interface SchedulerRepositoryOutput {
 
-    fun findSchedulerByIdOrThrow(schedulerId: Int): SchedulerOutputPort
+    fun findSchedulerByIdOrThrow(schedulerId: Long): SchedulerOutputPort
 
     fun saveScheduler(schedulerPort: SchedulerOutputPort): SchedulerOutputPort
 
-    fun deleteScheduler(schedulerId: Int)
+    fun deleteScheduler(schedulerId: Long)
 }

@@ -8,7 +8,7 @@ data class SchedulerRequest(
     val customerId: String,
 
     @NotBlank(message = "Court Id not informed")
-    val courtId: Int,
+    val courtId: Long,
 
     @NotBlank(message = "Scheduler not informed")
     val schedule: LocalDateTime

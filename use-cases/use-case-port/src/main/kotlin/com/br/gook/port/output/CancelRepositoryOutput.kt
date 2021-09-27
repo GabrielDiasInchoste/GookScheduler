@@ -6,7 +6,7 @@ interface CancelRepositoryOutput {
 
     fun saveCancel(cancelPort: CancelOutputPort): CancelOutputPort
 
-    fun findCancelByIdOrThrow(cancelId: Int): CancelOutputPort
+    fun findCancelByIdOrThrow(cancelId: Long): CancelOutputPort
 
-    fun deleteCancel(cancelId: Int)
+    fun deleteCancel(cancelId: Long)
 }

@@ -23,12 +23,12 @@ class CourtRepositoryImpl(
         return courtRepository.save(courtPort.toEntity()).toPort()
     }
 
-    override fun findCourtByIdOrThrow(courtId: Int): CourtOutputPort {
+    override fun findCourtByIdOrThrow(courtId: Long): CourtOutputPort {
         return courtRepository.findById(courtId).takeIf { it.isPresent }?.get()?.toPort()
             ?: throw Exception("CourtRepositoryImpl.findCourtByIdOrThrow - Error to find Court - courtId: $courtId")
     }
 
-    override fun deleteCourt(courtId: Int) {
+    override fun deleteCourt(courtId: Long) {
         val courtPort = findCourtByIdOrThrow(courtId)
         courtRepository.delete(courtPort.toEntity())
     }

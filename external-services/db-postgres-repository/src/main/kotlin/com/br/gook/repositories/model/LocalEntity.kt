@@ -10,7 +10,7 @@ data class LocalEntity(
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int,
+    val id: Long = 0,
 
     @Column(name = "NAME")
     val name: String,
@@ -24,7 +24,7 @@ data class LocalEntity(
     val courts: List<CourtEntity>,
 
     @Column(name = "CREATE_DATE")
-    val createDate: LocalDateTime,
+    val createDate: LocalDateTime = LocalDateTime.now(),
 
     @Column(name = "LAST_MODIFIED_DATE")
     val lasModifiedDate: LocalDateTime

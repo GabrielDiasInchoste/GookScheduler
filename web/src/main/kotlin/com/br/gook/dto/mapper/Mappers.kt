@@ -4,10 +4,11 @@ import com.br.gook.data.input.*
 import com.br.gook.data.output.*
 import com.br.gook.dto.request.*
 import com.br.gook.dto.response.*
+import org.springframework.data.jpa.domain.AbstractPersistable_.id
 
 fun AddressOutputPort.toResponse(): AddressResponse {
     return AddressResponse(
-        id = id,
+        id = id!!,
         name = name,
         number = number,
         description = description,
@@ -26,9 +27,18 @@ fun AddressRequest.toPort(): AddressInputPort {
     )
 }
 
+fun UpdateAddressRequest.toPort(): UpdateAddressInputPort {
+    return UpdateAddressInputPort(
+        name = name,
+        number = number,
+        description = description,
+        cep = cep,
+    )
+}
+
 fun CancelOutputPort.toResponse(): CancelResponse {
     return CancelResponse(
-        id = id,
+        id = id!!,
         description = description,
         cancelRequestedDate = cancelRequestedDate,
         cancelConfirmedDate = cancelConfirmedDate
@@ -45,7 +55,7 @@ fun CancelRequest.toPort(): CancelInputPort {
 
 fun CourtOutputPort.toResponse(): CourtResponse {
     return CourtResponse(
-        id = id,
+        id = id!!,
         name = name,
         type = type,
         description = description,
@@ -64,7 +74,7 @@ fun CourtRequest.toPort(): CourtInputPort {
 
 fun LocalOutputPort.toResponse(): LocalResponse {
     return LocalResponse(
-        id = id,
+        id = id!!,
         name = name,
         address = address.toResponse(),
         courts = courts.map { it.toResponse() },
@@ -80,9 +90,17 @@ fun LocalRequest.toPort(): LocalInputPort {
     )
 }
 
+fun SchedulerRequest.toPort(): SchedulerInputPort {
+    return SchedulerInputPort(
+        customerId = customerId,
+        courtId = courtId,
+        schedule = schedule
+    )
+}
+
 fun SchedulerOutputPort.toResponse(): SchedulerResponse {
     return SchedulerResponse(
-        id = id,
+        id = id!!,
         customerId = customerId,
         court = court.toResponse(),
         cancel = cancel?.toResponse(),

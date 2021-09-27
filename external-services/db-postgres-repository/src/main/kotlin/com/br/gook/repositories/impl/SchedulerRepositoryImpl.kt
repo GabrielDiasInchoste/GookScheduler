@@ -23,12 +23,12 @@ class SchedulerRepositoryImpl(
         return schedulerRepository.save(schedulerPort.toEntity()).toPort()
     }
 
-    override fun findSchedulerByIdOrThrow(schedulerId: Int): SchedulerOutputPort {
+    override fun findSchedulerByIdOrThrow(schedulerId: Long): SchedulerOutputPort {
         return schedulerRepository.findById(schedulerId).takeIf { it.isPresent }?.get()?.toPort()
             ?: throw Exception("SchedulerRepositoryImpl.findSchedulerByIdOrThrow - Error to find Scheduler - schedulerId: $schedulerId")
     }
 
-    override fun deleteScheduler(schedulerId: Int) {
+    override fun deleteScheduler(schedulerId: Long) {
         val schedulerPort = findSchedulerByIdOrThrow(schedulerId)
         schedulerRepository.delete(schedulerPort.toEntity())
     }

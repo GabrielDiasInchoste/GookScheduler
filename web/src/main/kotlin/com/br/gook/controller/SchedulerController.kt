@@ -2,7 +2,10 @@ package com.br.gook.controller
 
 import com.br.gook.data.output.SchedulerOutputPort
 import com.br.gook.dto.mapper.toPort
+import com.br.gook.dto.mapper.toResponse
+import com.br.gook.dto.request.SchedulerRequest
 import com.br.gook.dto.request.UpdateSchedulerRequest
+import com.br.gook.dto.response.SchedulerResponse
 import com.br.gook.port.input.SchedulerUseCaseInput
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -18,8 +21,8 @@ class SchedulerController(
 
     @GetMapping(value = ["{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getProduct(
-        @PathVariable(value = "schedulerId") schedulerId: Int
-    ): ResponseEntity<SchedulerOutputPort>? {
+        @PathVariable(value = "schedulerId") schedulerId: Long
+    ): ResponseEntity<SchedulerOutputPort> {
         return ResponseEntity.status(HttpStatus.OK)
             .contentType(MediaType.APPLICATION_JSON)
             .body(schedulerUseCaseInput.findScheduler(schedulerId))
@@ -27,18 +30,18 @@ class SchedulerController(
 
     @PostMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     fun postProduct(
-        @RequestBody @Valid schedulerRequest: SchedulerOutputPort
-    ): ResponseEntity<SchedulerOutputPort>? {
+        @RequestBody @Valid schedulerRequest: SchedulerRequest
+    ): ResponseEntity<SchedulerResponse> {
         return ResponseEntity.status(HttpStatus.CREATED)
             .contentType(MediaType.APPLICATION_JSON)
-            .body(schedulerUseCaseInput.createScheduler(schedulerRequest))
+            .body(schedulerUseCaseInput.createScheduler(schedulerRequest.toPort()).toResponse())
     }
 
     @PutMapping(value = ["{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun putProduct(
-        @PathVariable(value = "schedulerId") schedulerId: Int,
+        @PathVariable(value = "schedulerId") schedulerId: Long,
         @RequestBody @Valid updateSchedulerRequest: UpdateSchedulerRequest
-    ): ResponseEntity<SchedulerOutputPort>? {
+    ): ResponseEntity<SchedulerOutputPort> {
         return ResponseEntity.status(HttpStatus.OK)
             .contentType(MediaType.APPLICATION_JSON)
             .body(schedulerUseCaseInput.updateScheduler(schedulerId, updateSchedulerRequest.toPort()))
@@ -46,7 +49,7 @@ class SchedulerController(
 
     @DeleteMapping(value = ["{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun deleteProduct(
-        @PathVariable(value = "schedulerId") schedulerId: Int
+        @PathVariable(value = "schedulerId") schedulerId: Long
     ): ResponseEntity<Void> {
         schedulerUseCaseInput.deleteScheduler(schedulerId)
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()

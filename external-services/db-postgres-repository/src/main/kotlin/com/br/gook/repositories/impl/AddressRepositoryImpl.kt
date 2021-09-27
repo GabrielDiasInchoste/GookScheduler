@@ -23,12 +23,12 @@ class AddressRepositoryImpl(
         return addressRepository.save(addressPort.toEntity()).toPort()
     }
 
-    override fun findAddressByIdOrThrow(addressId: Int): AddressOutputPort {
+    override fun findAddressByIdOrThrow(addressId: Long): AddressOutputPort {
         return addressRepository.findById(addressId).takeIf { it.isPresent }?.get()?.toPort()
             ?: throw Exception("AddressRepositoryImpl.findAddressByIdOrThrow - Error to find Address - addressId: $addressId")
     }
 
-    override fun deleteAddress(productId: Int) {
+    override fun deleteAddress(productId: Long) {
         val productPort = findAddressByIdOrThrow(productId)
         addressRepository.delete(productPort.toEntity())
     }

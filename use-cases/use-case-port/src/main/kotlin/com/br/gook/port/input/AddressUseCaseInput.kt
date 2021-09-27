@@ -1,15 +1,16 @@
 package com.br.gook.port.input
 
 import com.br.gook.data.input.AddressInputPort
+import com.br.gook.data.input.UpdateAddressInputPort
 import com.br.gook.data.output.AddressOutputPort
 
 interface AddressUseCaseInput {
 
-    fun findAddress(addressId: Int): AddressOutputPort
+    fun findAddress(addressId: Long): AddressOutputPort
 
-    fun createAddress(addressPort: AddressInputPort): AddressOutputPort
+    fun createAddress(addressInputPort: AddressInputPort): AddressOutputPort
 
-    fun updateAddress(addressId: Int,addressPort: AddressInputPort): AddressOutputPort
+    fun updateAddress(addressId: Long,updateAddressInputPort: UpdateAddressInputPort): AddressOutputPort
 
-    fun deleteAddress(addressId: Int)
+    fun deleteAddress(addressId: Long)
 }

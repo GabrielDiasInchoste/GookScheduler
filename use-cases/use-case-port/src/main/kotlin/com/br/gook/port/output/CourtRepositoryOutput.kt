@@ -6,7 +6,7 @@ interface CourtRepositoryOutput {
 
     fun saveCourt(courtPort: CourtOutputPort): CourtOutputPort
 
-    fun findCourtByIdOrThrow(courtId: Int): CourtOutputPort
+    fun findCourtByIdOrThrow(courtId: Long): CourtOutputPort
 
-    fun deleteCourt(courtId: Int)
+    fun deleteCourt(courtId: Long)
 }

@@ -3,7 +3,7 @@ package com.br.gook.dto.response
 import java.time.LocalDateTime
 
 data class CourtResponse(
-    val id: Int,
+    val id: Long,
     val name: String,
     val type: String,
     val description: String,

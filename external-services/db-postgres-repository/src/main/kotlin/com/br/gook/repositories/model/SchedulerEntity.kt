@@ -10,7 +10,7 @@ data class SchedulerEntity(
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int,
+    val id: Long = 0,
 
     @Column(name = "CUSTOMER_ID")
     val customerId: String,
@@ -27,10 +27,10 @@ data class SchedulerEntity(
     val schedule: LocalDateTime,
 
     @Column(name = "CONFIRM_DATE")
-    val confirmDate: LocalDateTime,
+    val confirmDate: LocalDateTime?,
 
     @Column(name = "CREATE_DATE")
-    val createDate: LocalDateTime,
+    val createDate: LocalDateTime = LocalDateTime.now(),
 
     @Column(name = "LAST_MODIFIED_DATE")
     val lasModifiedDate: LocalDateTime

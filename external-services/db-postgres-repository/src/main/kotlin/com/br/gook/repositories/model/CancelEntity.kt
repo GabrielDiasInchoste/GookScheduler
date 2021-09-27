@@ -11,7 +11,7 @@ data class CancelEntity(
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int,
+    val id: Long = 0,
 
     @Column(name = "Description")
     val description: String,
@@ -20,6 +20,6 @@ data class CancelEntity(
     val cancelRequestedDate: LocalDateTime,
 
     @Column(name = "CANCEL_CONFIRMED_DATE")
-    val cancelConfirmedDate: LocalDateTime
+    val cancelConfirmedDate: LocalDateTime?
 
 )

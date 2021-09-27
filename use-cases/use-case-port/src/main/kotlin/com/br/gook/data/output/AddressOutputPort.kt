@@ -3,7 +3,7 @@ package com.br.gook.data.output
 import java.time.LocalDateTime
 
 data class AddressOutputPort(
-    val id: Int,
+    val id: Long?,
     val name: String,
     val number: Int,
     val description: String,
