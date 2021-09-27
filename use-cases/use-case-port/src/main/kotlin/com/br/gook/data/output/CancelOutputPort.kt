@@ -1,9 +1,9 @@
-package com.br.gook.data
+package com.br.gook.data.output
 
 import java.time.LocalDateTime
 
-data class CancelPort(
-    val id: Int?,
+data class CancelOutputPort(
+    val id: Int,
     val description: String,
     val cancelRequestedDate: LocalDateTime,
     val cancelConfirmedDate: LocalDateTime

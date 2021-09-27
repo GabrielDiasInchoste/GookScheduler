@@ -10,6 +10,6 @@ data class SchedulerRequest(
     @NotBlank(message = "Court Id not informed")
     val courtId: Int,
 
-    @NotBlank(message = "Scheduler not informed") //TODO Adicionar nos requests
+    @NotBlank(message = "Scheduler not informed")
     val schedule: LocalDateTime
 )

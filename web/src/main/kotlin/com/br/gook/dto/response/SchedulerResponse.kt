@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 data class SchedulerResponse(
     val id: Int,
     val customerId: String,
-    val local: LocalResponse,
+    val court: CourtResponse,
     val cancel: CancelResponse?,
     val schedule: LocalDateTime?,
     val confirmDate: LocalDateTime?,

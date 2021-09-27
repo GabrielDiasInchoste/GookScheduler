@@ -1,9 +1,9 @@
-package com.br.gook.data
+package com.br.gook.data.output
 
 import java.time.LocalDateTime
 
-data class AddressPort(
-    val id: Int?,
+data class AddressOutputPort(
+    val id: Int,
     val name: String,
     val number: Int,
     val description: String,

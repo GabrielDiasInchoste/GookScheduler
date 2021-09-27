@@ -1,6 +1,5 @@
 package com.br.gook.controller
 
-import com.br.gook.data.AddressPort
 import com.br.gook.dto.mapper.toPort
 import com.br.gook.dto.mapper.toResponse
 import com.br.gook.dto.request.AddressRequest

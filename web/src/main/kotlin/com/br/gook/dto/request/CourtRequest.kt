@@ -1,11 +1,15 @@
 package com.br.gook.dto.request
 
-import java.time.LocalDateTime
+import javax.validation.constraints.NotBlank
 
 data class CourtRequest(
+
+    @NotBlank(message = "Description not informed")
     val name: String,
+
+    @NotBlank(message = "Type not informed")
     val type: String,
-    val description: String,
-    val createDate: LocalDateTime,
-    val lasModifiedDate: LocalDateTime
+
+    @NotBlank(message = "Description not informed")
+    val description: String
 )

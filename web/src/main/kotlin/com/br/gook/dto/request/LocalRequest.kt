@@ -1,11 +1,12 @@
 package com.br.gook.dto.request
 
 import java.time.LocalDateTime
+import javax.validation.constraints.NotBlank
 
 data class LocalRequest(
+    @NotBlank(message = "Description not informed")
     val name: String,
-    val address: AddressRequest, //TODO
-    val courts: List<CourtRequest>,
-    val createDate: LocalDateTime,
-    val lasModifiedDate: LocalDateTime
+
+    @NotBlank(message = "Address Id not informed")
+    val addressId: Int
 )

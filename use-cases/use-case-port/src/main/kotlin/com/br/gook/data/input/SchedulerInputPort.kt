@@ -1,12 +1,11 @@
-package com.br.gook.data
+package com.br.gook.data.input
 
 import java.time.LocalDateTime
 
-data class SchedulerPort(
-    val id: Int?,
+data class SchedulerInputPort(
     val customerId: String,
-    val local: LocalPort?, // TODO
-    val cancel: CancelPort?,
+    val local: LocalInputPort,
+    val cancel: CancelInputPort?,
     val schedule: LocalDateTime,
     val confirmDate: LocalDateTime,
     val createDate: LocalDateTime,

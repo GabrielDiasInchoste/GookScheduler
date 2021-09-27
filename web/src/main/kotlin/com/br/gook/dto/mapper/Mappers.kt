@@ -1,15 +1,13 @@
 package com.br.gook.dto.mapper
 
-import com.br.gook.data.*
-import com.br.gook.dto.request.AddressRequest
-import com.br.gook.dto.request.CancelRequest
-import com.br.gook.dto.request.CourtRequest
-import com.br.gook.dto.request.LocalRequest
+import com.br.gook.data.input.*
+import com.br.gook.data.output.*
+import com.br.gook.dto.request.*
 import com.br.gook.dto.response.*
 
-fun AddressPort.toResponse(): AddressResponse {
+fun AddressOutputPort.toResponse(): AddressResponse {
     return AddressResponse(
-        id = id!!,
+        id = id,
         name = name,
         number = number,
         description = description,
@@ -19,39 +17,35 @@ fun AddressPort.toResponse(): AddressResponse {
     )
 }
 
-fun AddressRequest.toPort(): AddressPort {
-    return AddressPort(
-        id = null,
+fun AddressRequest.toPort(): AddressInputPort {
+    return AddressInputPort(
         name = name,
         number = number,
         description = description,
         cep = cep,
-        createDate = createDate,
-        lasModifiedDate = lasModifiedDate
     )
 }
 
-fun CancelPort.toResponse(): CancelResponse {
+fun CancelOutputPort.toResponse(): CancelResponse {
     return CancelResponse(
-        id = id!!,
+        id = id,
         description = description,
         cancelRequestedDate = cancelRequestedDate,
         cancelConfirmedDate = cancelConfirmedDate
     )
 }
 
-fun CancelRequest.toPort(): CancelPort {
-    return CancelPort(
-        id = null,
+fun CancelRequest.toPort(): CancelInputPort {
+    return CancelInputPort(
         description = description,
         cancelRequestedDate = cancelRequestedDate,
         cancelConfirmedDate = cancelConfirmedDate
     )
 }
 
-fun CourtPort.toResponse(): CourtResponse {
+fun CourtOutputPort.toResponse(): CourtResponse {
     return CourtResponse(
-        id = id!!,
+        id = id,
         name = name,
         type = type,
         description = description,
@@ -60,20 +54,17 @@ fun CourtPort.toResponse(): CourtResponse {
     )
 }
 
-fun CourtRequest.toPort(): CourtPort {
-    return CourtPort(
-        id = null,
+fun CourtRequest.toPort(): CourtInputPort {
+    return CourtInputPort(
         name = name,
         type = type,
         description = description,
-        createDate = createDate,
-        lasModifiedDate = lasModifiedDate
     )
 }
 
-fun LocalPort.toResponse(): LocalResponse {
+fun LocalOutputPort.toResponse(): LocalResponse {
     return LocalResponse(
-        id = id!!,
+        id = id,
         name = name,
         address = address.toResponse(),
         courts = courts.map { it.toResponse() },
@@ -82,22 +73,18 @@ fun LocalPort.toResponse(): LocalResponse {
     )
 }
 
-fun LocalRequest.toPort(): LocalPort {
-    return LocalPort(
-        id = null,
+fun LocalRequest.toPort(): LocalInputPort {
+    return LocalInputPort(
         name = name,
-        address = address.toPort(),
-        courts = courts.map { it.toPort() },
-        createDate = createDate,
-        lasModifiedDate = lasModifiedDate
+        addressId = addressId
     )
 }
 
-fun SchedulerPort.toResponse(): SchedulerResponse {
+fun SchedulerOutputPort.toResponse(): SchedulerResponse {
     return SchedulerResponse(
-        id = id!!,
+        id = id,
         customerId = customerId,
-        local = local!!.toResponse(),
+        court = court.toResponse(),
         cancel = cancel?.toResponse(),
         schedule = schedule,
         confirmDate = confirmDate,
@@ -106,15 +93,9 @@ fun SchedulerPort.toResponse(): SchedulerResponse {
     )
 }
 
-//fun SchedulerRequest.toPort(): SchedulerPort {
-//    return SchedulerPort(
-//        id = null,
-//        customerId = customerId,
-//        local = local.toPort(),
-//        cancel = cancel?.toPort(),
-//        schedule = schedule,
-//        confirmDate = confirmDate,
-//        createDate = createDate,
-//        lasModifiedDate = lasModifiedDate
-//    )
-
+fun UpdateSchedulerRequest.toPort(): UpdateSchedulerInputPort {
+    return UpdateSchedulerInputPort(
+        cancel = cancel?.toPort(),
+        scheduleDate = scheduleDate,
+    )
+}

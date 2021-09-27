@@ -1,9 +1,9 @@
 package com.br.gook.repositories.mapper
 
-import com.br.gook.data.*
+import com.br.gook.data.output.*
 import com.br.gook.repositories.model.*
 
-fun AddressPort.toEntity(): AddressEntity {
+fun AddressOutputPort.toEntity(): AddressEntity {
     return AddressEntity(
         id = id!!,
         name = name,
@@ -15,8 +15,8 @@ fun AddressPort.toEntity(): AddressEntity {
     )
 }
 
-fun AddressEntity.toPort(): AddressPort {
-    return AddressPort(
+fun AddressEntity.toPort(): AddressOutputPort {
+    return AddressOutputPort(
         id = id,
         name = name,
         number = number,
@@ -27,7 +27,7 @@ fun AddressEntity.toPort(): AddressPort {
     )
 }
 
-fun CancelPort.toEntity(): CancelEntity {
+fun CancelOutputPort.toEntity(): CancelEntity {
     return CancelEntity(
         id = id!!,
         description = description,
@@ -36,8 +36,8 @@ fun CancelPort.toEntity(): CancelEntity {
     )
 }
 
-fun CancelEntity.toPort(): CancelPort {
-    return CancelPort(
+fun CancelEntity.toPort(): CancelOutputPort {
+    return CancelOutputPort(
         id = id,
         description = description,
         cancelRequestedDate = cancelRequestedDate,
@@ -45,7 +45,7 @@ fun CancelEntity.toPort(): CancelPort {
     )
 }
 
-fun CourtPort.toEntity(): CourtEntity {
+fun CourtOutputPort.toEntity(): CourtEntity {
     return CourtEntity(
         id = id!!,
         name = name,
@@ -56,8 +56,8 @@ fun CourtPort.toEntity(): CourtEntity {
     )
 }
 
-fun CourtEntity.toPort(): CourtPort {
-    return CourtPort(
+fun CourtEntity.toPort(): CourtOutputPort {
+    return CourtOutputPort(
         id = id,
         name = name,
         type = type,
@@ -67,7 +67,7 @@ fun CourtEntity.toPort(): CourtPort {
     )
 }
 
-fun LocalPort.toEntity(): LocalEntity {
+fun LocalOutputPort.toEntity(): LocalEntity {
     return LocalEntity(
         id = id!!,
         name = name,
@@ -78,8 +78,8 @@ fun LocalPort.toEntity(): LocalEntity {
     )
 }
 
-fun LocalEntity.toPort(): LocalPort {
-    return LocalPort(
+fun LocalEntity.toPort(): LocalOutputPort {
+    return LocalOutputPort(
         id = id,
         name = name,
         address = address.toPort(),
@@ -89,11 +89,11 @@ fun LocalEntity.toPort(): LocalPort {
     )
 }
 
-fun SchedulerPort.toEntity(): SchedulerEntity {
+fun SchedulerOutputPort.toEntity(): SchedulerEntity {
     return SchedulerEntity(
-        id = id!!,
+        id = id,
         customerId = customerId,
-        court = local!!.courts.first().toEntity(),
+        court = court.toEntity(),
         cancel = cancel?.toEntity(),
         schedule = schedule,
         confirmDate = confirmDate,
@@ -102,11 +102,11 @@ fun SchedulerPort.toEntity(): SchedulerEntity {
     )
 }
 
-fun SchedulerEntity.toPort(): SchedulerPort {
-    return SchedulerPort(
+fun SchedulerEntity.toPort(): SchedulerOutputPort {
+    return SchedulerOutputPort(
         id = id,
         customerId = customerId,
-        local = null,
+        court = court.toPort(),
         cancel = cancel?.toPort(),
         schedule = schedule,
         confirmDate = confirmDate,
