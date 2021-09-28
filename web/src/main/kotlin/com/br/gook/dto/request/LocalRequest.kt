@@ -8,5 +8,5 @@ data class LocalRequest(
     val name: String,
 
     @NotBlank(message = "Address Id not informed")
-    val addressId: Int
+    val addressId: Long
 )

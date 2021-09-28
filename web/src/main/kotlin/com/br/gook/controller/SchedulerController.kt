@@ -20,7 +20,7 @@ class SchedulerController(
 ) {
 
     @GetMapping(value = ["{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun getProduct(
+    fun getScheduler(
         @PathVariable(value = "schedulerId") schedulerId: Long
     ): ResponseEntity<SchedulerOutputPort> {
         return ResponseEntity.status(HttpStatus.OK)
@@ -29,7 +29,7 @@ class SchedulerController(
     }
 
     @PostMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun postProduct(
+    fun postScheduler(
         @RequestBody @Valid schedulerRequest: SchedulerRequest
     ): ResponseEntity<SchedulerResponse> {
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -38,7 +38,7 @@ class SchedulerController(
     }
 
     @PutMapping(value = ["{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun putProduct(
+    fun putScheduler(
         @PathVariable(value = "schedulerId") schedulerId: Long,
         @RequestBody @Valid updateSchedulerRequest: UpdateSchedulerRequest
     ): ResponseEntity<SchedulerOutputPort> {
@@ -48,7 +48,7 @@ class SchedulerController(
     }
 
     @DeleteMapping(value = ["{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun deleteProduct(
+    fun deleteScheduler(
         @PathVariable(value = "schedulerId") schedulerId: Long
     ): ResponseEntity<Void> {
         schedulerUseCaseInput.deleteScheduler(schedulerId)

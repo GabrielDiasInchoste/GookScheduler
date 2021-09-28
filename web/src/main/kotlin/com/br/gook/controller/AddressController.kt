@@ -19,7 +19,7 @@ class AddressController(
 ) {
 
     @GetMapping(value = ["{addressId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun getProduct(
+    fun getAddress(
         @PathVariable(value = "addressId") addressId: Long
     ): ResponseEntity<AddressResponse> {
         return ResponseEntity.status(HttpStatus.OK)
@@ -28,7 +28,7 @@ class AddressController(
     }
 
     @PostMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun postProduct(
+    fun postAddress(
         @RequestBody @Valid addressRequest: AddressRequest
     ): ResponseEntity<AddressResponse> {
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -37,7 +37,7 @@ class AddressController(
     }
 
     @PutMapping(value = ["{addressId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun putProduct(
+    fun putAddress(
         @PathVariable(value = "addressId") addressId: Long,
         @RequestBody @Valid updateAddressRequest: UpdateAddressRequest
     ): ResponseEntity<AddressResponse> {
@@ -47,7 +47,7 @@ class AddressController(
     }
 
     @DeleteMapping(value = ["{addressId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun deleteProduct(
+    fun deleteAddress(
         @PathVariable(value = "addressId") addressId: Long
     ): ResponseEntity<Void> {
         addressUseCaseInput.deleteAddress(addressId)

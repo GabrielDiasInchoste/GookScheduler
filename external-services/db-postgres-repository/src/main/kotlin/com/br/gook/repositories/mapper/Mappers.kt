@@ -1,6 +1,8 @@
 package com.br.gook.repositories.mapper
 
+import com.br.gook.data.SchedulerStatusPort
 import com.br.gook.data.output.*
+import com.br.gook.repositories.SchedulerStatus
 import com.br.gook.repositories.model.*
 
 fun AddressOutputPort.toEntity(): AddressEntity {
@@ -88,6 +90,7 @@ fun LocalEntity.toPort(): LocalOutputPort {
 fun SchedulerOutputPort.toEntity(): SchedulerEntity {
     return SchedulerEntity(
         customerId = customerId,
+        status = SchedulerStatus.REQUESTED,
         court = court.toEntity(),
         cancel = cancel?.toEntity(),
         schedule = schedule,
@@ -101,6 +104,7 @@ fun SchedulerEntity.toPort(): SchedulerOutputPort {
     return SchedulerOutputPort(
         id = id,
         customerId = customerId,
+        status = status.toPort(),
         court = court.toPort(),
         cancel = cancel?.toPort(),
         schedule = schedule,
@@ -108,4 +112,12 @@ fun SchedulerEntity.toPort(): SchedulerOutputPort {
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
+}
+
+fun SchedulerStatus.toPort(): SchedulerStatusPort {
+    return when (this) {
+        SchedulerStatus.REQUESTED -> SchedulerStatusPort.REQUESTED
+        SchedulerStatus.CONFIRMED -> SchedulerStatusPort.CONFIRMED
+        else -> SchedulerStatusPort.CANCELED
+    }
 }

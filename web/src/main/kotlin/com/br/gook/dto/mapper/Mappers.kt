@@ -4,7 +4,6 @@ import com.br.gook.data.input.*
 import com.br.gook.data.output.*
 import com.br.gook.dto.request.*
 import com.br.gook.dto.response.*
-import org.springframework.data.jpa.domain.AbstractPersistable_.id
 
 fun AddressOutputPort.toResponse(): AddressResponse {
     return AddressResponse(
@@ -36,23 +35,6 @@ fun UpdateAddressRequest.toPort(): UpdateAddressInputPort {
     )
 }
 
-fun CancelOutputPort.toResponse(): CancelResponse {
-    return CancelResponse(
-        id = id!!,
-        description = description,
-        cancelRequestedDate = cancelRequestedDate,
-        cancelConfirmedDate = cancelConfirmedDate
-    )
-}
-
-fun CancelRequest.toPort(): CancelInputPort {
-    return CancelInputPort(
-        description = description,
-        cancelRequestedDate = cancelRequestedDate,
-        cancelConfirmedDate = cancelConfirmedDate
-    )
-}
-
 fun CourtOutputPort.toResponse(): CourtResponse {
     return CourtResponse(
         id = id!!,
@@ -66,6 +48,14 @@ fun CourtOutputPort.toResponse(): CourtResponse {
 
 fun CourtRequest.toPort(): CourtInputPort {
     return CourtInputPort(
+        name = name,
+        type = type,
+        description = description,
+    )
+}
+
+fun UpdateCourtRequest.toPort(): UpdateCourtInputPort {
+    return UpdateCourtInputPort(
         name = name,
         type = type,
         description = description,
@@ -90,6 +80,12 @@ fun LocalRequest.toPort(): LocalInputPort {
     )
 }
 
+fun UpdateLocalRequest.toPort(): UpdateLocalInputPort {
+    return UpdateLocalInputPort(
+        name = name
+    )
+}
+
 fun SchedulerRequest.toPort(): SchedulerInputPort {
     return SchedulerInputPort(
         customerId = customerId,
@@ -97,11 +93,35 @@ fun SchedulerRequest.toPort(): SchedulerInputPort {
         schedule = schedule
     )
 }
+fun CancelOutputPort.toResponse(): CancelResponse {
+    return CancelResponse(
+        id = id!!,
+        description = description,
+        cancelRequestedDate = cancelRequestedDate,
+        cancelConfirmedDate = cancelConfirmedDate
+    )
+}
 
+fun CancelRequest.toPort(): CancelInputPort {
+    return CancelInputPort(
+        description = description,
+        cancelRequestedDate = cancelRequestedDate,
+        cancelConfirmedDate = cancelConfirmedDate
+    )
+}
+
+fun UpdateCancelRequest.toPort(): UpdateCancelInputPort {
+    return UpdateCancelInputPort(
+        description = description,
+        cancelRequestedDate = cancelRequestedDate,
+        cancelConfirmedDate = cancelConfirmedDate
+    )
+}
 fun SchedulerOutputPort.toResponse(): SchedulerResponse {
     return SchedulerResponse(
         id = id!!,
         customerId = customerId,
+        status = status,
         court = court.toResponse(),
         cancel = cancel?.toResponse(),
         schedule = schedule,
@@ -114,6 +134,8 @@ fun SchedulerOutputPort.toResponse(): SchedulerResponse {
 fun UpdateSchedulerRequest.toPort(): UpdateSchedulerInputPort {
     return UpdateSchedulerInputPort(
         cancel = cancel?.toPort(),
+        status = status,
         scheduleDate = scheduleDate,
     )
 }
+
