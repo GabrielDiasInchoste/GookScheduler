@@ -5,6 +5,5 @@ include("external-services")
 include("use-cases")
 include("use-cases:use-case-port")
 include("use-cases:use-case")
-include 'external-services:db-postgres-repository'
-findProject(':external-services:db-postgres-repository')?.name = 'db-postgres-repository'
+include("external-services:db-postgres-repository")
 

@@ -24,7 +24,7 @@ repositories {
 
 bootJar {
     enabled = false
-    archivesBaseName = "gook-user"
+    archivesBaseName = "gook-scheduler"
     archiveVersion = "0.0.1-SNAPSHOT"
 
 }
