@@ -1,8 +1,8 @@
 package com.br.gook.scheduler
 
 import com.br.gook.data.input.SchedulerInputPort
-import com.br.gook.data.output.SchedulerOutputPort
 import com.br.gook.data.input.UpdateSchedulerInputPort
+import com.br.gook.data.output.SchedulerOutputPort
 import com.br.gook.mappers.toOutputPort
 import com.br.gook.mappers.toPort
 import com.br.gook.port.input.SchedulerUseCaseInput
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service
 class SchedulerUseCase(
     val schedulerRepositoryOutput: SchedulerRepositoryOutput,
     val courtRepositoryOutput: CourtRepositoryOutput
-
 ) : SchedulerUseCaseInput {
 
     private val log = Logger.getLogger(javaClass)

@@ -17,8 +17,7 @@ class SwaggerConfig {
         return Docket(DocumentationType.SWAGGER_2)
             .select()
             .paths(PathSelectors.any())
-//            .apis(RequestHandlerSelectors.basePackage("com.gabrieldias.products.controller"))
-            .apis(RequestHandlerSelectors.any())
+            .apis(RequestHandlerSelectors.basePackage("com.br.gook.controller"))
             .build()
     }
 }

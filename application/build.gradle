@@ -1,0 +1,7 @@
+dependencies {
+    implementation project(':web')
+    implementation project(':external-services')
+    implementation project(':external-services:db-postgres-repository')
+    implementation project(':use-cases:use-case')
+    implementation project(':use-cases:use-case-port')
+}
