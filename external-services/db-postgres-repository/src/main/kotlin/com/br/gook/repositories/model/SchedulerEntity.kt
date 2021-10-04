@@ -1,5 +1,6 @@
 package com.br.gook.repositories.model
 
+import com.br.gook.repositories.SchedulerStatus
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -14,6 +15,9 @@ data class SchedulerEntity(
 
     @Column(name = "CUSTOMER_ID")
     val customerId: String,
+
+    @Column(name = "STATUS")
+    val status: SchedulerStatus,
 
     @OneToOne
     @Column(name = "COURT")

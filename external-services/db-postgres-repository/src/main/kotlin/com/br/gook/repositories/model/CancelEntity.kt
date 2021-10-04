@@ -1,11 +1,10 @@
 package com.br.gook.repositories.model
 
 import java.time.LocalDateTime
-import javax.persistence.Column
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
+@Entity
+@Table(name = "TB_CANCEL")
 data class CancelEntity(
 
     @Id
@@ -13,7 +12,7 @@ data class CancelEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @Column(name = "Description")
+    @Column(name = "DESCRIPTION")
     val description: String,
 
     @Column(name = "CANCEL_REQUESTED_DATE")
