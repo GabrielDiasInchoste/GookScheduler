@@ -1,4 +1,4 @@
-package com.br.gook.repositories
+package com.br.gook
 
 enum class SchedulerStatus {
     REQUESTED,

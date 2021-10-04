@@ -1,9 +1,9 @@
-package com.br.gook.repositories.mapper
+package com.br.gook.mapper
 
+import com.br.gook.SchedulerStatus
 import com.br.gook.data.SchedulerStatusPort
 import com.br.gook.data.output.*
-import com.br.gook.repositories.SchedulerStatus
-import com.br.gook.repositories.model.*
+import com.br.gook.model.*
 
 fun AddressOutputPort.toEntity(): AddressEntity {
     return AddressEntity(

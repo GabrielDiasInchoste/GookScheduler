@@ -1,9 +1,10 @@
 rootProject.name = "GookScheduler"
-include("application")
-include("web")
-include("external-services")
-include("use-cases")
-include("use-cases:use-case-port")
-include("use-cases:use-case")
-include("external-services:db-postgres-repository")
+
+include 'application'
+include 'web'
+include 'external-services'
+include 'use-cases'
+include 'use-cases:use-case-port'
+include 'use-cases:use-case'
+include 'external-services:db-postgres-repository'
 

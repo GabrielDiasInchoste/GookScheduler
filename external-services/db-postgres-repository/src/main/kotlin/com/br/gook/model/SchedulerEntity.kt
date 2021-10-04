@@ -1,6 +1,6 @@
-package com.br.gook.repositories.model
+package com.br.gook.model
 
-import com.br.gook.repositories.SchedulerStatus
+import com.br.gook.SchedulerStatus
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -10,21 +10,23 @@ data class SchedulerEntity(
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SCHEDULER_ID_SEQ")
+    @SequenceGenerator(name = "SCHEDULER_ID_SEQ", sequenceName = "SCHEDULER_ID_SEQ", allocationSize = 1)
     val id: Long = 0,
 
     @Column(name = "CUSTOMER_ID")
     val customerId: String,
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
     val status: SchedulerStatus,
 
     @OneToOne
-    @Column(name = "COURT")
+    @JoinColumn(name = "COURT_ID")
     val court: CourtEntity,
 
     @OneToOne
-    @Column(name = "CANCEL")
+    @JoinColumn(name = "CANCEL_ID")
     val cancel: CancelEntity?,
 
     @Column(name = "SCHEDULE")

@@ -1,4 +1,4 @@
-package com.br.gook.repositories.model
+package com.br.gook.model
 
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -9,7 +9,8 @@ data class CancelEntity(
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CANCEL_ID_SEQ")
+    @SequenceGenerator(name = "CANCEL_ID_SEQ", sequenceName = "CANCEL_ID_SEQ", allocationSize = 1)
     val id: Long = 0,
 
     @Column(name = "DESCRIPTION")

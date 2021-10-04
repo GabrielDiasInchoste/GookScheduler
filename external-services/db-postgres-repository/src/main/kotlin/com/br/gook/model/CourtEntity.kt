@@ -1,15 +1,16 @@
-package com.br.gook.repositories.model
+package com.br.gook.model
 
 import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-@Table(name = "COURT")
+@Table(name = "TB_COURT")
 data class CourtEntity(
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COURT_ID_SEQ")
+    @SequenceGenerator(name = "COURT_ID_SEQ", sequenceName = "COURT_ID_SEQ", allocationSize = 1)
     val id: Long = 0,
 
     @Column(name = "NAME")
@@ -20,6 +21,12 @@ data class CourtEntity(
 
     @Column(name = "DESCRIPTION")
     val description: String,
+
+    @ManyToOne(
+        fetch = FetchType.LAZY
+    )
+    @JoinColumn(name = "LOCAL_ID")
+    val local: LocalEntity,
 
     @Column(name = "CREATE_DATE")
     val createDate: LocalDateTime = LocalDateTime.now(),

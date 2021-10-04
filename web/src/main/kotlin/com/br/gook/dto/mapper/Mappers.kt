@@ -93,6 +93,7 @@ fun SchedulerRequest.toPort(): SchedulerInputPort {
         schedule = schedule
     )
 }
+
 fun CancelOutputPort.toResponse(): CancelResponse {
     return CancelResponse(
         id = id!!,

@@ -1,4 +1,4 @@
-package com.br.gook.repositories.model
+package com.br.gook.model
 
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -9,18 +9,21 @@ data class LocalEntity(
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LOCAL_ID_SEQ")
+    @SequenceGenerator(name = "LOCAL_ID_SEQ", sequenceName = "LOCAL_ID_SEQ", allocationSize = 1)
     val id: Long = 0,
 
     @Column(name = "NAME")
     val name: String,
 
     @OneToOne
-    @Column(name = "ADDRESS")
+    @JoinColumn(name = "ADDRESS")
     val address: AddressEntity,
 
-    @OneToMany
-    @Column(name = "COURTS")
+    @OneToMany(
+        cascade = [CascadeType.PERSIST],
+        fetch = FetchType.LAZY
+    )
     val courts: List<CourtEntity>,
 
     @Column(name = "CREATE_DATE")

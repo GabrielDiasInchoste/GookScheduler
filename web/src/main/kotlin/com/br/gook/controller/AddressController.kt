@@ -34,7 +34,7 @@ class AddressController(
         return ResponseEntity.status(HttpStatus.CREATED)
             .contentType(MediaType.APPLICATION_JSON)
             .body(addressUseCaseInput.createAddress(addressRequest.toPort()).toResponse())
-    }
+}
 
     @PutMapping(value = ["{addressId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun putAddress(

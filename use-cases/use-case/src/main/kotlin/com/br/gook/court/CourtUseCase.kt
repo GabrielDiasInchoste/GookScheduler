@@ -8,9 +8,9 @@ import com.br.gook.mappers.toPort
 import com.br.gook.port.input.CourtUseCaseInput
 import com.br.gook.port.output.CourtRepositoryOutput
 import org.jboss.logging.Logger
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 
-@Service
+@Component
 class CourtUseCase(
     val courtRepositoryOutput: CourtRepositoryOutput
 ) : CourtUseCaseInput {

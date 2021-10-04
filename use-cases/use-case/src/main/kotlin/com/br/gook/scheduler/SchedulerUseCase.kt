@@ -9,9 +9,9 @@ import com.br.gook.port.input.SchedulerUseCaseInput
 import com.br.gook.port.output.CourtRepositoryOutput
 import com.br.gook.port.output.SchedulerRepositoryOutput
 import org.jboss.logging.Logger
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 
-@Service
+@Component
 class SchedulerUseCase(
     val schedulerRepositoryOutput: SchedulerRepositoryOutput,
     val courtRepositoryOutput: CourtRepositoryOutput

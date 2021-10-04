@@ -1,15 +1,17 @@
-package com.br.gook.repositories.impl
+package com.br.gook.impl
 
 import com.br.gook.data.output.LocalOutputPort
 import com.br.gook.port.output.LocalRepositoryOutput
-import com.br.gook.repositories.interfaces.LocalRepository
-import com.br.gook.repositories.mapper.toEntity
-import com.br.gook.repositories.mapper.toPort
+import com.br.gook.repository.LocalRepository
+import com.br.gook.mapper.toEntity
+import com.br.gook.mapper.toPort
 import org.jboss.logging.Logger
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 
 @Service
 class LocalRepositoryImpl(
+    @Lazy
     private val localRepository: LocalRepository
 ) : LocalRepositoryOutput {
 

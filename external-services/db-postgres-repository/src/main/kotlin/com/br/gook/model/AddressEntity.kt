@@ -1,15 +1,16 @@
-package com.br.gook.repositories.model
+package com.br.gook.model
 
 import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-@Table(name = "ADDRESS")
+@Table(name = "TB_ADDRESS")
 data class AddressEntity(
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ADDRESS_ID_SEQ")
+    @SequenceGenerator(name = "ADDRESS_ID_SEQ", sequenceName = "ADDRESS_ID_SEQ", allocationSize = 1)
     val id: Long = 0,
 
     @Column(name = "NAME")

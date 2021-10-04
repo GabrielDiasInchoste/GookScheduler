@@ -9,9 +9,9 @@ import com.br.gook.port.input.LocalUseCaseInput
 import com.br.gook.port.output.AddressRepositoryOutput
 import com.br.gook.port.output.LocalRepositoryOutput
 import org.jboss.logging.Logger
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 
-@Service
+@Component
 class LocalUseCase(
     val localRepositoryOutput: LocalRepositoryOutput,
     val addressRepositoryOutput: AddressRepositoryOutput

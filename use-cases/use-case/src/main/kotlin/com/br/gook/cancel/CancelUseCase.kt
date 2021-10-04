@@ -7,12 +7,12 @@ import com.br.gook.data.output.SchedulerOutputPort
 import com.br.gook.mappers.toOutputPort
 import com.br.gook.mappers.toPort
 import com.br.gook.port.input.CancelUseCaseInput
-import com.br.gook.port.output.SchedulerRepositoryOutput
 import com.br.gook.port.output.CancelRepositoryOutput
+import com.br.gook.port.output.SchedulerRepositoryOutput
 import org.jboss.logging.Logger
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 
-@Service
+@Component
 class CancelUseCase(
     val cancelRepositoryOutput: CancelRepositoryOutput,
     val schedulerRepositoryOutput: SchedulerRepositoryOutput
