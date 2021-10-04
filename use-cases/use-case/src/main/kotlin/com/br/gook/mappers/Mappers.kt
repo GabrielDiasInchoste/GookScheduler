@@ -29,23 +29,25 @@ fun UpdateAddressInputPort.toPort(address: AddressOutputPort): AddressOutputPort
     )
 }
 
-fun CourtInputPort.toOutputPort(): CourtOutputPort {
+fun CourtInputPort.toOutputPort(local: LocalOutputPort): CourtOutputPort {
     return CourtOutputPort(
         id = null,
         name = name,
         type = type,
         description = description,
+        local = local,
         createDate = LocalDateTime.now(),
         lasModifiedDate = LocalDateTime.now()
     )
 }
 
-fun UpdateCourtInputPort.toPort(court: CourtOutputPort): CourtOutputPort {
+fun UpdateCourtInputPort.toPort(court: CourtOutputPort, local: LocalOutputPort): CourtOutputPort {
     return CourtOutputPort(
         id = court.id,
         name = name ?: court.name,
         type = type ?: court.type,
         description = description ?: court.description,
+        local = local,
         createDate = court.createDate,
         lasModifiedDate = court.lasModifiedDate
     )

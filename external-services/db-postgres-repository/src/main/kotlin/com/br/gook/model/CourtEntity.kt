@@ -8,7 +8,7 @@ import javax.persistence.*
 data class CourtEntity(
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "COURT_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COURT_ID_SEQ")
     @SequenceGenerator(name = "COURT_ID_SEQ", sequenceName = "COURT_ID_SEQ", allocationSize = 1)
     val id: Long = 0,
@@ -22,9 +22,7 @@ data class CourtEntity(
     @Column(name = "DESCRIPTION")
     val description: String,
 
-    @ManyToOne(
-        fetch = FetchType.LAZY
-    )
+    @ManyToOne
     @JoinColumn(name = "LOCAL_ID")
     val local: LocalEntity,
 

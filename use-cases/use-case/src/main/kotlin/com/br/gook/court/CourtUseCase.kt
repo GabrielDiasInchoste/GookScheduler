@@ -7,12 +7,14 @@ import com.br.gook.mappers.toOutputPort
 import com.br.gook.mappers.toPort
 import com.br.gook.port.input.CourtUseCaseInput
 import com.br.gook.port.output.CourtRepositoryOutput
+import com.br.gook.port.output.LocalRepositoryOutput
 import org.jboss.logging.Logger
 import org.springframework.stereotype.Component
 
 @Component
 class CourtUseCase(
-    val courtRepositoryOutput: CourtRepositoryOutput
+    val courtRepositoryOutput: CourtRepositoryOutput,
+    val localRepositoryOutput: LocalRepositoryOutput
 ) : CourtUseCaseInput {
 
     private val log = Logger.getLogger(javaClass)
@@ -28,7 +30,8 @@ class CourtUseCase(
 
     override fun createCourt(courtInputPort: CourtInputPort): CourtOutputPort {
         log.info("CourtUseCase.createCourt - Start - courtInputPort : $courtInputPort")
-        val response = courtRepositoryOutput.saveCourt(courtInputPort.toOutputPort())
+        val local = localRepositoryOutput.findLocalByIdOrThrow(courtInputPort.localId)
+        val response = courtRepositoryOutput.saveCourt(courtInputPort.toOutputPort(local))
         log.info("CourtUseCase.createCourt - End - response : $response")
         return response
 
@@ -38,9 +41,21 @@ class CourtUseCase(
 
         log.info("CourtUseCase.updateCourt - Start - courtId : $courtId , updateCourtInputPort : $updateCourtInputPort")
         val courtPort = courtRepositoryOutput.findCourtByIdOrThrow(courtId)
+
         val response = courtRepositoryOutput.saveCourt(
-            updateCourtInputPort.toPort(courtPort)
+            if (updateCourtInputPort.localId != null && updateCourtInputPort.localId != courtPort.local.id) {
+                updateCourtInputPort.toPort(
+                    courtPort,
+                    localRepositoryOutput.findLocalByIdOrThrow(updateCourtInputPort.localId!!)
+                )
+            } else {
+                updateCourtInputPort.toPort(
+                    courtPort,
+                    courtPort.local
+                )
+            }
         )
+
         log.info("CourtUseCase.updateCourt - End - response : $response")
         return response
     }

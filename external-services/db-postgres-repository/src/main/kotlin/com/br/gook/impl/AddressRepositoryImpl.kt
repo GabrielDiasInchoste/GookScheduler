@@ -18,9 +18,11 @@ class AddressRepositoryImpl(
     private val log = Logger.getLogger(javaClass)
 
     override fun saveAddress(addressPort: AddressOutputPort): AddressOutputPort {
-        addressRepository.findById(addressPort.id).ifPresent {
-            log.error("AddressRepositoryImpl.saveAddress - Address already saved with id - addressId: ${addressPort.id}")
-            throw Exception("AddressRepositoryImpl.saveAddress - Address already saved with id - addressId: ${addressPort.id}")
+        if (addressPort.id != null) {
+            addressRepository.findById(addressPort.id!!).ifPresent {
+                log.error("AddressRepositoryImpl.saveAddress - Address already saved with id - addressId: ${addressPort.id}")
+                throw Exception("AddressRepositoryImpl.saveAddress - Address already saved with id - addressId: ${addressPort.id}")
+            }
         }
         return addressRepository.save(addressPort.toEntity()).toPort()
     }

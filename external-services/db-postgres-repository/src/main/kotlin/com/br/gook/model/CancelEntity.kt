@@ -8,7 +8,7 @@ import javax.persistence.*
 data class CancelEntity(
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "CANCEL_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CANCEL_ID_SEQ")
     @SequenceGenerator(name = "CANCEL_ID_SEQ", sequenceName = "CANCEL_ID_SEQ", allocationSize = 1)
     val id: Long = 0,

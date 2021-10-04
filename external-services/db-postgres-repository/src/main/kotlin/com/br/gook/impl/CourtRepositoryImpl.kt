@@ -18,9 +18,11 @@ class CourtRepositoryImpl(
     private val log = Logger.getLogger(javaClass)
 
     override fun saveCourt(courtPort: CourtOutputPort): CourtOutputPort {
-        courtRepository.findById(courtPort.id).ifPresent {
-            log.error("CourtRepositoryImpl.saveCourt - Court already saved with id - courtId: ${courtPort.id}")
-            throw Exception("CourtRepositoryImpl.saveCourt - Court already saved with id - courtId: ${courtPort.id}")
+        if (courtPort.id != null) {
+            courtRepository.findById(courtPort.id!!).ifPresent {
+                log.error("CourtRepositoryImpl.saveCourt - Court already saved with id - courtId: ${courtPort.id}")
+                throw Exception("CourtRepositoryImpl.saveCourt - Court already saved with id - courtId: ${courtPort.id}")
+            }
         }
         return courtRepository.save(courtPort.toEntity()).toPort()
     }

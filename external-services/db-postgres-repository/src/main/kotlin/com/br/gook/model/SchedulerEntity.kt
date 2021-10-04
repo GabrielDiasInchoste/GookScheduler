@@ -5,11 +5,11 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-@Table(name = "SCHEDULER")
+@Table(name = "TB_SCHEDULER")
 data class SchedulerEntity(
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "SCHEDULER_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SCHEDULER_ID_SEQ")
     @SequenceGenerator(name = "SCHEDULER_ID_SEQ", sequenceName = "SCHEDULER_ID_SEQ", allocationSize = 1)
     val id: Long = 0,

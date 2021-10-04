@@ -8,10 +8,10 @@ import javax.persistence.*
 data class AddressEntity(
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ADDRESS_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ADDRESS_ID_SEQ")
     @SequenceGenerator(name = "ADDRESS_ID_SEQ", sequenceName = "ADDRESS_ID_SEQ", allocationSize = 1)
-    val id: Long = 0,
+    val id: Long,
 
     @Column(name = "NAME")
     val name: String,

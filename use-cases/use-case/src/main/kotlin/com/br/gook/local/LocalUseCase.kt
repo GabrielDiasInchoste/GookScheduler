@@ -20,38 +20,58 @@ class LocalUseCase(
     private val log = Logger.getLogger(javaClass)
 
     override fun findLocal(localId: Long): LocalOutputPort {
+        try {
 
-        log.info("LocalUseCase.findLocal - Start - localId : $localId")
-        val response = localRepositoryOutput.findLocalByIdOrThrow(localId)
-        log.info("LocalUseCase.findLocal - End - response : $response")
+            log.info("LocalUseCase.findLocal - Start - localId : $localId")
+            val response = localRepositoryOutput.findLocalByIdOrThrow(localId)
+            log.info("LocalUseCase.findLocal - End - response : $response")
 
-        return response
+            return response
+        } catch (ex: Exception) {
+            log.error("LocalUseCase.createLocal - Error to Create Local - Error : ${ex.message}", ex)
+            throw ex
+        }
     }
 
     override fun createLocal(localInputPort: LocalInputPort): LocalOutputPort {
-        log.info("LocalUseCase.createLocal - Start - localInputPort : $localInputPort")
-        val address = addressRepositoryOutput.findAddressByIdOrThrow(localInputPort.addressId)
-        val response = localRepositoryOutput.saveLocal(localInputPort.toOutputPort(address))
-        log.info("LocalUseCase.createLocal - End - response : $response")
-        return response
+        try {
+            log.info("LocalUseCase.createLocal - Start - localInputPort : $localInputPort")
+            val address = addressRepositoryOutput.findAddressByIdOrThrow(localInputPort.addressId)
+            val response = localRepositoryOutput.saveLocal(localInputPort.toOutputPort(address))
 
+            log.info("LocalUseCase.createLocal - End - response : $response")
+            return response
+        } catch (ex: Exception) {
+            log.error("LocalUseCase.createLocal - Error to Create Local - Error : ${ex.message}", ex)
+            throw ex
+        }
     }
 
     override fun updateLocal(localId: Long, updateLocalInputPort: UpdateLocalInputPort): LocalOutputPort {
+        try {
 
-        log.info("LocalUseCase.updateLocal - Start - localId : $localId , updateLocalInputPort : $updateLocalInputPort")
-        val localPort = localRepositoryOutput.findLocalByIdOrThrow(localId)
-        val response = localRepositoryOutput.saveLocal(
-            updateLocalInputPort.toPort(localPort)
-        )
-        log.info("LocalUseCase.updateLocal - End - response : $response")
-        return response
+            log.info("LocalUseCase.updateLocal - Start - localId : $localId , updateLocalInputPort : $updateLocalInputPort")
+            val localPort = localRepositoryOutput.findLocalByIdOrThrow(localId)
+            val response = localRepositoryOutput.saveLocal(
+                updateLocalInputPort.toPort(localPort)
+            )
+            log.info("LocalUseCase.updateLocal - End - response : $response")
+            return response
+        } catch (ex: Exception) {
+            log.error("LocalUseCase.updateLocal - Error to Update Local - Error : ${ex.message}", ex)
+            throw ex
+        }
     }
 
     override fun deleteLocal(localId: Long) {
-        log.info("LocalUseCase.deleteLocal - Start - localId : $localId")
-        val response = localRepositoryOutput.deleteLocal(localId)
-        log.info("LocalUseCase.deleteLocal - End - response : $response")
+        try {
+            log.info("LocalUseCase.deleteLocal - Start - localId : $localId")
+            val response = localRepositoryOutput.deleteLocal(localId)
+            log.info("LocalUseCase.deleteLocal - End - response : $response")
+            return response
+        } catch (ex: Exception) {
+            log.error("LocalUseCase.deleteLocal - Error to Delete Local - Error : ${ex.message}", ex)
+            throw ex
+        }
     }
-
 }

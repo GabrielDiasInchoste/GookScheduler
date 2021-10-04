@@ -11,5 +11,8 @@ data class CourtRequest(
     val type: String,
 
     @NotBlank(message = "Description not informed")
-    val description: String
+    val description: String,
+
+    @NotBlank(message = "Local Id not informed")
+    val localId: Long
 )

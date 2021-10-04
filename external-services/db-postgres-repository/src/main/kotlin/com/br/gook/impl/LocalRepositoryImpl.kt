@@ -18,11 +18,14 @@ class LocalRepositoryImpl(
     private val log = Logger.getLogger(javaClass)
 
     override fun saveLocal(localPort: LocalOutputPort): LocalOutputPort {
-        localRepository.findById(localPort.id).ifPresent {
-            log.error("LocalRepositoryImpl.saveCourt - Local already saved with id - localId: ${localPort.id}")
-            throw Exception("LocalRepositoryImpl.saveCourt - Local already saved with id - localId: ${localPort.id}")
+        if (localPort.id != null) {
+            localRepository.findById(localPort.id!!).ifPresent {
+                log.error("LocalRepositoryImpl.saveCourt - Local already saved with id - localId: ${localPort.id}")
+                throw Exception("LocalRepositoryImpl.saveCourt - Local already saved with id - localId: ${localPort.id}")
+            }
         }
-        return localRepository.save(localPort.toEntity()).toPort()
+        val entity = localPort.toEntity()
+        return localRepository.save(entity).toPort()
     }
 
     override fun findLocalByIdOrThrow(localId: Long): LocalOutputPort {

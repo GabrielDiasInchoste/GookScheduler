@@ -7,6 +7,7 @@ import com.br.gook.model.*
 
 fun AddressOutputPort.toEntity(): AddressEntity {
     return AddressEntity(
+        id = id ?: 0,
         name = name,
         number = number,
         description = description,
@@ -50,6 +51,7 @@ fun CourtOutputPort.toEntity(): CourtEntity {
         name = name,
         type = type,
         description = description,
+        local = local.toEntity(),
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
@@ -61,6 +63,7 @@ fun CourtEntity.toPort(): CourtOutputPort {
         name = name,
         type = type,
         description = description,
+        local = local.toPort(),
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
@@ -70,7 +73,6 @@ fun LocalOutputPort.toEntity(): LocalEntity {
     return LocalEntity(
         name = name,
         address = address.toEntity(),
-        courts = courts.map { it.toEntity() },
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
@@ -81,7 +83,7 @@ fun LocalEntity.toPort(): LocalOutputPort {
         id = id,
         name = name,
         address = address.toPort(),
-        courts = courts.map { it.toPort() },
+        courts = arrayListOf(),
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
