@@ -1,8 +1,9 @@
 package com.br.gook.port.input
 
+import com.br.gook.data.input.ConfirmSchedulerInputPort
 import com.br.gook.data.input.SchedulerInputPort
-import com.br.gook.data.output.SchedulerOutputPort
 import com.br.gook.data.input.UpdateSchedulerInputPort
+import com.br.gook.data.output.SchedulerOutputPort
 
 interface SchedulerUseCaseInput {
 
@@ -10,7 +11,7 @@ interface SchedulerUseCaseInput {
 
     fun createScheduler(schedulerInputPort: SchedulerInputPort): SchedulerOutputPort
 
-    fun updateScheduler(schedulerId: Long, updateSchedulerPort: UpdateSchedulerInputPort): SchedulerOutputPort
+    fun confirmScheduler(confirmSchedulerInputPort: ConfirmSchedulerInputPort): SchedulerOutputPort
 
-    fun deleteScheduler(schedulerId: Long)
+    fun updateScheduler(schedulerId: Long, updateSchedulerPort: UpdateSchedulerInputPort): SchedulerOutputPort
 }

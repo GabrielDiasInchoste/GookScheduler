@@ -1,10 +1,10 @@
 package com.br.gook.impl
 
 import com.br.gook.data.output.CourtOutputPort
-import com.br.gook.port.output.CourtRepositoryOutput
-import com.br.gook.repository.CourtRepository
 import com.br.gook.mapper.toEntity
 import com.br.gook.mapper.toPort
+import com.br.gook.port.output.CourtRepositoryOutput
+import com.br.gook.repository.CourtRepository
 import org.jboss.logging.Logger
 import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
@@ -24,6 +24,10 @@ class CourtRepositoryImpl(
                 throw Exception("CourtRepositoryImpl.saveCourt - Court already saved with id - courtId: ${courtPort.id}")
             }
         }
+        return courtRepository.save(courtPort.toEntity()).toPort()
+    }
+
+    override fun updateCourt(courtPort: CourtOutputPort): CourtOutputPort {
         return courtRepository.save(courtPort.toEntity()).toPort()
     }
 

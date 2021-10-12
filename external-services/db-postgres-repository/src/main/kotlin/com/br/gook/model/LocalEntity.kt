@@ -2,7 +2,6 @@ package com.br.gook.model
 
 import java.time.LocalDateTime
 import javax.persistence.*
-import javax.transaction.Transactional
 
 @Entity
 @Table(name = "TB_LOCAL")
@@ -10,16 +9,18 @@ data class LocalEntity(
 
     @Id
     @Column(name = "LOCAL_ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LOCAL_ID_SEQ")
-    @SequenceGenerator(name = "LOCAL_ID_SEQ", sequenceName = "LOCAL_ID_SEQ", allocationSize = 1)
-    val id: Long = 0,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long,
 
     @Column(name = "NAME")
     val name: String,
 
-    @OneToOne
+    @OneToOne(cascade = [CascadeType.MERGE])
     @JoinColumn(name = "ADDRESS_ID")
     val address: AddressEntity,
+
+    @OneToMany(mappedBy = "localId", cascade = [CascadeType.ALL])
+    val courts: MutableList<CourtEntity>,
 
     @Column(name = "CREATE_DATE")
     val createDate: LocalDateTime = LocalDateTime.now(),

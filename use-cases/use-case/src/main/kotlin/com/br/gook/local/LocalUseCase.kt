@@ -28,7 +28,7 @@ class LocalUseCase(
 
             return response
         } catch (ex: Exception) {
-            log.error("LocalUseCase.createLocal - Error to Create Local - Error : ${ex.message}", ex)
+            log.error("LocalUseCase.findLocal - Error to Create Local - Error : ${ex.message}", ex)
             throw ex
         }
     }
@@ -52,7 +52,7 @@ class LocalUseCase(
 
             log.info("LocalUseCase.updateLocal - Start - localId : $localId , updateLocalInputPort : $updateLocalInputPort")
             val localPort = localRepositoryOutput.findLocalByIdOrThrow(localId)
-            val response = localRepositoryOutput.saveLocal(
+            val response = localRepositoryOutput.updateLocal(
                 updateLocalInputPort.toPort(localPort)
             )
             log.info("LocalUseCase.updateLocal - End - response : $response")

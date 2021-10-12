@@ -31,9 +31,12 @@ fun AddressEntity.toPort(): AddressOutputPort {
 
 fun CancelOutputPort.toEntity(): CancelEntity {
     return CancelEntity(
+        id = id ?: 0,
         description = description,
         cancelRequestedDate = cancelRequestedDate,
-        cancelConfirmedDate = cancelConfirmedDate
+        cancelConfirmedDate = cancelConfirmedDate,
+        createDate = createDate,
+        lasModifiedDate = lasModifiedDate
     )
 }
 
@@ -42,16 +45,19 @@ fun CancelEntity.toPort(): CancelOutputPort {
         id = id,
         description = description,
         cancelRequestedDate = cancelRequestedDate,
-        cancelConfirmedDate = cancelConfirmedDate
+        cancelConfirmedDate = cancelConfirmedDate,
+        createDate = createDate,
+        lasModifiedDate = lasModifiedDate
     )
 }
 
 fun CourtOutputPort.toEntity(): CourtEntity {
     return CourtEntity(
+        id = id ?: 0,
         name = name,
         type = type,
         description = description,
-        local = local.toEntity(),
+        localId = localId,
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
@@ -63,7 +69,7 @@ fun CourtEntity.toPort(): CourtOutputPort {
         name = name,
         type = type,
         description = description,
-        local = local.toPort(),
+        localId = localId,
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
@@ -71,8 +77,10 @@ fun CourtEntity.toPort(): CourtOutputPort {
 
 fun LocalOutputPort.toEntity(): LocalEntity {
     return LocalEntity(
+        id = id ?: 0,
         name = name,
         address = address.toEntity(),
+        courts = mutableListOf(),
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
@@ -83,7 +91,7 @@ fun LocalEntity.toPort(): LocalOutputPort {
         id = id,
         name = name,
         address = address.toPort(),
-        courts = arrayListOf(),
+        courts = courts.map { it.toPort() },
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
@@ -91,8 +99,9 @@ fun LocalEntity.toPort(): LocalOutputPort {
 
 fun SchedulerOutputPort.toEntity(): SchedulerEntity {
     return SchedulerEntity(
+        id = id ?: 0,
         customerId = customerId,
-        status = SchedulerStatus.REQUESTED,
+        status = status.toEntity(),
         court = court.toEntity(),
         cancel = cancel?.toEntity(),
         schedule = schedule,
@@ -118,8 +127,18 @@ fun SchedulerEntity.toPort(): SchedulerOutputPort {
 
 fun SchedulerStatus.toPort(): SchedulerStatusPort {
     return when (this) {
-        SchedulerStatus.REQUESTED -> SchedulerStatusPort.REQUESTED
+        SchedulerStatus.CANCELED -> SchedulerStatusPort.CANCELED
         SchedulerStatus.CONFIRMED -> SchedulerStatusPort.CONFIRMED
-        else -> SchedulerStatusPort.CANCELED
+        SchedulerStatus.CANCEL_REQUESTED -> SchedulerStatusPort.CANCEL_REQUESTED
+        else -> SchedulerStatusPort.REQUESTED
+    }
+}
+
+fun SchedulerStatusPort.toEntity(): SchedulerStatus {
+    return when (this) {
+        SchedulerStatusPort.CANCELED -> SchedulerStatus.CANCELED
+        SchedulerStatusPort.CONFIRMED -> SchedulerStatus.CONFIRMED
+        SchedulerStatusPort.CANCEL_REQUESTED -> SchedulerStatus.CANCEL_REQUESTED
+        else -> SchedulerStatus.REQUESTED
     }
 }

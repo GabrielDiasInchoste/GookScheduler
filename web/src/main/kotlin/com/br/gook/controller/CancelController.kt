@@ -1,5 +1,6 @@
 package com.br.gook.controller
 
+import com.br.gook.data.input.CancelConfirmInputPort
 import com.br.gook.dto.mapper.toPort
 import com.br.gook.dto.mapper.toResponse
 import com.br.gook.dto.request.CancelRequest
@@ -19,14 +20,14 @@ class CancelController(
     private val cancelUseCaseInput: CancelUseCaseInput
 ) {
 
-    @PostMapping(value = ["schedulerId"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @PostMapping(value = ["schedulerId/{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun postCancel(
         @PathVariable(value = "schedulerId") schedulerId: Long,
         @RequestBody @Valid cancelRequest: CancelRequest
     ): ResponseEntity<SchedulerResponse> {
         return ResponseEntity.status(HttpStatus.CREATED)
             .contentType(MediaType.APPLICATION_JSON)
-            .body(cancelUseCaseInput.createCancel(schedulerId, cancelRequest.toPort()).toResponse())
+            .body(cancelUseCaseInput.requestCancel(schedulerId, cancelRequest.toPort()).toResponse())
     }
 
     @PutMapping(value = ["{cancelId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -39,4 +40,12 @@ class CancelController(
             .body(cancelUseCaseInput.updateCancel(cancelId, updateCancelRequest.toPort()).toResponse())
     }
 
+    @PostMapping(value = ["confirm/schedulerId/{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun confirmScheduler(
+        @PathVariable(value = "schedulerId") schedulerId: Long,
+    ): ResponseEntity<SchedulerResponse> {
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(cancelUseCaseInput.confirmCancel(CancelConfirmInputPort(schedulerId)).toResponse())
+    }
 }

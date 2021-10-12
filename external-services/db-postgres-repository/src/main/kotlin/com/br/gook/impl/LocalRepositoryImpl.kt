@@ -24,13 +24,20 @@ class LocalRepositoryImpl(
                 throw Exception("LocalRepositoryImpl.saveCourt - Local already saved with id - localId: ${localPort.id}")
             }
         }
-        val entity = localPort.toEntity()
-        return localRepository.save(entity).toPort()
+        return localRepository.save(localPort.toEntity()).toPort()
+    }
+
+    override fun updateLocal(localPort: LocalOutputPort): LocalOutputPort {
+        return localRepository.save(localPort.toEntity()).toPort()
     }
 
     override fun findLocalByIdOrThrow(localId: Long): LocalOutputPort {
-        return localRepository.findById(localId).takeIf { it.isPresent }?.get()?.toPort()
-            ?: throw Exception("LocalRepositoryImpl.findLocalByIdOrThrow - Error to find Local - localId: $localId")
+
+        val takeIf = localRepository.findById(localId).get()
+
+        return takeIf.toPort()
+//        return localRepository.findById(localId).takeIf { it.isPresent }?.get()?.toPort()
+//            ?: throw Exception("LocalRepositoryImpl.findLocalByIdOrThrow - Error to find Local - localId: $localId")
     }
 
     override fun deleteLocal(localId: Long) {

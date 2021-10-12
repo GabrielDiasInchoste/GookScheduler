@@ -10,9 +10,8 @@ data class SchedulerEntity(
 
     @Id
     @Column(name = "SCHEDULER_ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SCHEDULER_ID_SEQ")
-    @SequenceGenerator(name = "SCHEDULER_ID_SEQ", sequenceName = "SCHEDULER_ID_SEQ", allocationSize = 1)
-    val id: Long = 0,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long,
 
     @Column(name = "CUSTOMER_ID")
     val customerId: String,
@@ -21,11 +20,11 @@ data class SchedulerEntity(
     @Column(name = "STATUS")
     val status: SchedulerStatus,
 
-    @OneToOne
+    @OneToOne(cascade = [CascadeType.MERGE])
     @JoinColumn(name = "COURT_ID")
     val court: CourtEntity,
 
-    @OneToOne
+    @OneToOne(cascade = [CascadeType.MERGE])
     @JoinColumn(name = "CANCEL_ID")
     val cancel: CancelEntity?,
 

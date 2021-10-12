@@ -8,5 +8,5 @@ interface SchedulerRepositoryOutput {
 
     fun saveScheduler(schedulerPort: SchedulerOutputPort): SchedulerOutputPort
 
-    fun deleteScheduler(schedulerId: Long)
+    fun updateScheduler(schedulerPort: SchedulerOutputPort): SchedulerOutputPort
 }

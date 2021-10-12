@@ -40,6 +40,7 @@ fun CourtOutputPort.toResponse(): CourtResponse {
         id = id!!,
         name = name,
         type = type,
+        localId = localId,
         description = description,
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
@@ -107,9 +108,7 @@ fun CancelOutputPort.toResponse(): CancelResponse {
 
 fun CancelRequest.toPort(): CancelInputPort {
     return CancelInputPort(
-        description = description,
-        cancelRequestedDate = cancelRequestedDate,
-        cancelConfirmedDate = cancelConfirmedDate
+        description = description
     )
 }
 
@@ -139,7 +138,7 @@ fun UpdateSchedulerRequest.toPort(): UpdateSchedulerInputPort {
     return UpdateSchedulerInputPort(
         cancel = cancel?.toPort(),
         status = status,
-        scheduleDate = scheduleDate,
+        scheduleDate = scheduleDate
     )
 }
 

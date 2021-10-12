@@ -1,5 +1,6 @@
 package com.br.gook.scheduler
 
+import com.br.gook.data.input.ConfirmSchedulerInputPort
 import com.br.gook.data.input.SchedulerInputPort
 import com.br.gook.data.input.UpdateSchedulerInputPort
 import com.br.gook.data.output.SchedulerOutputPort
@@ -20,41 +21,61 @@ class SchedulerUseCase(
     private val log = Logger.getLogger(javaClass)
 
     override fun findScheduler(schedulerId: Long): SchedulerOutputPort {
+        try {
+            log.info("SchedulerUseCase.findScheduler - Start - schedulerId : $schedulerId")
+            val response = schedulerRepositoryOutput.findSchedulerByIdOrThrow(schedulerId)
+            log.info("SchedulerUseCase.findScheduler - End - response : $response")
 
-        log.info("SchedulerUseCase.findScheduler - Start - schedulerId : $schedulerId")
-        val response = schedulerRepositoryOutput.findSchedulerByIdOrThrow(schedulerId)
-        log.info("SchedulerUseCase.findScheduler - End - response : $response")
-
-        return response
+            return response
+        } catch (ex: Exception) {
+            log.error("SchedulerUseCase.findScheduler - Error to Find Scheduler - Error : ${ex.message}", ex)
+            throw ex
+        }
     }
 
     override fun createScheduler(schedulerInputPort: SchedulerInputPort): SchedulerOutputPort {
-        log.info("SchedulerUseCase.createScheduler - Start - schedulerInputPort : $schedulerInputPort")
-        val court = courtRepositoryOutput.findCourtByIdOrThrow(schedulerInputPort.courtId)
-        val response = schedulerRepositoryOutput.saveScheduler(schedulerInputPort.toOutputPort(court))
-        log.info("SchedulerUseCase.createScheduler - End - response : $response")
-        return response
+        try {
+            log.info("SchedulerUseCase.createScheduler - Start - schedulerInputPort : $schedulerInputPort")
+            val court = courtRepositoryOutput.findCourtByIdOrThrow(schedulerInputPort.courtId)
+            val response = schedulerRepositoryOutput.saveScheduler(schedulerInputPort.toOutputPort(court))
+            log.info("SchedulerUseCase.createScheduler - End - response : $response")
+            return response
+        } catch (ex: Exception) {
+            log.error("SchedulerUseCase.createScheduler - Error to Create Scheduler - Error : ${ex.message}", ex)
+            throw ex
+        }
+    }
 
+    override fun confirmScheduler(confirmSchedulerInputPort: ConfirmSchedulerInputPort): SchedulerOutputPort {
+        try {
+            log.info("SchedulerUseCase.confirmScheduler - Start - confirmSchedulerInputPort : $confirmSchedulerInputPort")
+
+            val schedulerOutputPort =
+                schedulerRepositoryOutput.findSchedulerByIdOrThrow(confirmSchedulerInputPort.schedulerId)
+            val response =
+                schedulerRepositoryOutput.updateScheduler(confirmSchedulerInputPort.toOutputPort(schedulerOutputPort))
+
+            log.info("SchedulerUseCase.confirmScheduler - End - response : $response")
+            return response
+        } catch (ex: Exception) {
+            log.error("SchedulerUseCase.confirmScheduler - Error to Confirm Scheduler - Error : ${ex.message}", ex)
+            throw ex
+        }
     }
 
     override fun updateScheduler(
         schedulerId: Long,
         updateSchedulerPort: UpdateSchedulerInputPort
     ): SchedulerOutputPort {
-
-        log.info("SchedulerUseCase.updateScheduler - Start - schedulerId : $schedulerId , updateSchedulerPort : $updateSchedulerPort")
-        val schedulerPort = schedulerRepositoryOutput.findSchedulerByIdOrThrow(schedulerId)
-        val response = schedulerRepositoryOutput.saveScheduler(
-            updateSchedulerPort.toPort(schedulerPort)
-        )
-        log.info("SchedulerUseCase.updateScheduler - End - response : $response")
-        return response
+        try {
+            log.info("SchedulerUseCase.updateScheduler - Start - schedulerId : $schedulerId , updateSchedulerPort : $updateSchedulerPort")
+            val schedulerPort = schedulerRepositoryOutput.findSchedulerByIdOrThrow(schedulerId)
+            val response = schedulerRepositoryOutput.updateScheduler(updateSchedulerPort.toPort(schedulerPort))
+            log.info("SchedulerUseCase.updateScheduler - End - response : $response")
+            return response
+        } catch (ex: Exception) {
+            log.error("SchedulerUseCase.updateScheduler - Error to Update Scheduler - Error : ${ex.message}", ex)
+            throw ex
+        }
     }
-
-    override fun deleteScheduler(schedulerId: Long) {
-        log.info("SchedulerUseCase.deleteScheduler - Start - schedulerId : $schedulerId")
-        val response = schedulerRepositoryOutput.deleteScheduler(schedulerId)
-        log.info("SchedulerUseCase.deleteScheduler - End - response : $response")
-    }
-
 }

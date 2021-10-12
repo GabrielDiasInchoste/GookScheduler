@@ -25,29 +25,29 @@ fun UpdateAddressInputPort.toPort(address: AddressOutputPort): AddressOutputPort
         description = description ?: address.description,
         cep = cep ?: address.cep,
         createDate = address.createDate,
-        lasModifiedDate = address.lasModifiedDate
+        lasModifiedDate = LocalDateTime.now()
     )
 }
 
-fun CourtInputPort.toOutputPort(local: LocalOutputPort): CourtOutputPort {
+fun CourtInputPort.toOutputPort(): CourtOutputPort {
     return CourtOutputPort(
         id = null,
         name = name,
         type = type,
         description = description,
-        local = local,
+        localId = localId,
         createDate = LocalDateTime.now(),
         lasModifiedDate = LocalDateTime.now()
     )
 }
 
-fun UpdateCourtInputPort.toPort(court: CourtOutputPort, local: LocalOutputPort): CourtOutputPort {
+fun UpdateCourtInputPort.toPort(court: CourtOutputPort): CourtOutputPort {
     return CourtOutputPort(
         id = court.id,
         name = name ?: court.name,
         type = type ?: court.type,
         description = description ?: court.description,
-        local = local,
+        localId = localId ?: court.localId,
         createDate = court.createDate,
         lasModifiedDate = court.lasModifiedDate
     )
@@ -71,7 +71,7 @@ fun UpdateLocalInputPort.toPort(local: LocalOutputPort): LocalOutputPort {
         address = local.address,
         courts = local.courts,
         createDate = local.createDate,
-        lasModifiedDate = local.lasModifiedDate
+        lasModifiedDate = LocalDateTime.now()
     )
 }
 
@@ -79,8 +79,10 @@ fun CancelInputPort.toOutputPort(): CancelOutputPort {
     return CancelOutputPort(
         id = null,
         description = description,
-        cancelRequestedDate = cancelRequestedDate,
-        cancelConfirmedDate = cancelConfirmedDate
+        cancelRequestedDate = LocalDateTime.now(),
+        cancelConfirmedDate = null,
+        createDate = LocalDateTime.now(),
+        lasModifiedDate = LocalDateTime.now()
     )
 }
 
@@ -89,7 +91,9 @@ fun UpdateCancelInputPort.toPort(cancel: CancelOutputPort): CancelOutputPort {
         id = null,
         description = description ?: cancel.description,
         cancelRequestedDate = cancelRequestedDate ?: cancel.cancelRequestedDate,
-        cancelConfirmedDate = cancelConfirmedDate ?: cancel.cancelConfirmedDate
+        cancelConfirmedDate = cancelConfirmedDate ?: cancel.cancelConfirmedDate,
+        createDate = cancel.createDate,
+        lasModifiedDate = LocalDateTime.now()
     )
 }
 
@@ -113,15 +117,23 @@ fun UpdateSchedulerInputPort.toPort(scheduler: SchedulerOutputPort): SchedulerOu
         customerId = scheduler.customerId,
         status = status ?: scheduler.status,
         court = scheduler.court,
-        cancel = CancelOutputPort(
-            id = scheduler.cancel!!.id,
-            description = cancel?.description ?: scheduler.cancel!!.description,
-            cancelRequestedDate = cancel?.cancelRequestedDate ?: scheduler.cancel!!.cancelRequestedDate,
-            cancelConfirmedDate = cancel?.cancelConfirmedDate ?: scheduler.cancel!!.cancelConfirmedDate
-        ),
+        cancel = scheduler.cancel,
         schedule = scheduleDate ?: scheduler.schedule,
         confirmDate = scheduler.confirmDate,
         createDate = scheduler.createDate,
-        lasModifiedDate = scheduler.lasModifiedDate
+        lasModifiedDate = LocalDateTime.now()
+    )
+}
+fun ConfirmSchedulerInputPort.toOutputPort(scheduler: SchedulerOutputPort): SchedulerOutputPort {
+    return SchedulerOutputPort(
+        id = scheduler.id,
+        customerId = scheduler.customerId,
+        status = SchedulerStatusPort.CONFIRMED,
+        court = scheduler.court,
+        cancel = scheduler.cancel,
+        schedule = scheduler.schedule,
+        confirmDate = LocalDateTime.now(),
+        createDate = scheduler.createDate,
+        lasModifiedDate = LocalDateTime.now()
     )
 }

@@ -9,9 +9,8 @@ data class CancelEntity(
 
     @Id
     @Column(name = "CANCEL_ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CANCEL_ID_SEQ")
-    @SequenceGenerator(name = "CANCEL_ID_SEQ", sequenceName = "CANCEL_ID_SEQ", allocationSize = 1)
-    val id: Long = 0,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long,
 
     @Column(name = "DESCRIPTION")
     val description: String,
@@ -20,6 +19,12 @@ data class CancelEntity(
     val cancelRequestedDate: LocalDateTime,
 
     @Column(name = "CANCEL_CONFIRMED_DATE")
-    val cancelConfirmedDate: LocalDateTime?
+    val cancelConfirmedDate: LocalDateTime?,
+
+    @Column(name = "CREATE_DATE")
+    val createDate: LocalDateTime = LocalDateTime.now(),
+
+    @Column(name = "LAST_MODIFIED_DATE")
+    val lasModifiedDate: LocalDateTime
 
 )

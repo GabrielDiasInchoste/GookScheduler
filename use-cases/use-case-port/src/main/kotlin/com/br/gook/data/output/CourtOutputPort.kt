@@ -6,7 +6,7 @@ data class CourtOutputPort(
     val id: Long?,
     val name: String,
     val type: String,
-    val local: LocalOutputPort,
+    val localId: Long,
     val description: String,
     val createDate: LocalDateTime,
     val lasModifiedDate: LocalDateTime

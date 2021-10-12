@@ -27,6 +27,10 @@ class AddressRepositoryImpl(
         return addressRepository.save(addressPort.toEntity()).toPort()
     }
 
+    override fun updateAddress(addressPort: AddressOutputPort): AddressOutputPort {
+        return addressRepository.save(addressPort.toEntity()).toPort()
+    }
+
     override fun findAddressByIdOrThrow(addressId: Long): AddressOutputPort {
         return addressRepository.findById(addressId).takeIf { it.isPresent }?.get()?.toPort()
             ?: throw Exception("AddressRepositoryImpl.findAddressByIdOrThrow - Error to find Address - addressId: $addressId")

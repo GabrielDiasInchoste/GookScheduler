@@ -1,5 +1,6 @@
 package com.br.gook.controller
 
+import com.br.gook.data.input.ConfirmSchedulerInputPort
 import com.br.gook.data.output.SchedulerOutputPort
 import com.br.gook.dto.mapper.toPort
 import com.br.gook.dto.mapper.toResponse
@@ -37,6 +38,15 @@ class SchedulerController(
             .body(schedulerUseCaseInput.createScheduler(schedulerRequest.toPort()).toResponse())
     }
 
+    @PostMapping(value = ["confirm/{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun confirmScheduler(
+        @PathVariable(value = "schedulerId") schedulerId: Long
+    ): ResponseEntity<SchedulerResponse> {
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(schedulerUseCaseInput.confirmScheduler(ConfirmSchedulerInputPort(schedulerId)).toResponse())
+    }
+
     @PutMapping(value = ["{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun putScheduler(
         @PathVariable(value = "schedulerId") schedulerId: Long,
@@ -45,13 +55,5 @@ class SchedulerController(
         return ResponseEntity.status(HttpStatus.OK)
             .contentType(MediaType.APPLICATION_JSON)
             .body(schedulerUseCaseInput.updateScheduler(schedulerId, updateSchedulerRequest.toPort()))
-    }
-
-    @DeleteMapping(value = ["{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun deleteScheduler(
-        @PathVariable(value = "schedulerId") schedulerId: Long
-    ): ResponseEntity<Void> {
-        schedulerUseCaseInput.deleteScheduler(schedulerId)
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
 }

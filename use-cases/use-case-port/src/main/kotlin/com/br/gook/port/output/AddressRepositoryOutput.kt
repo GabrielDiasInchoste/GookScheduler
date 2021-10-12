@@ -6,6 +6,8 @@ interface AddressRepositoryOutput {
 
     fun saveAddress(addressPort: AddressOutputPort): AddressOutputPort
 
+    fun updateAddress(addressPort: AddressOutputPort): AddressOutputPort
+
     fun findAddressByIdOrThrow(addressId: Long): AddressOutputPort
 
     fun deleteAddress(productId: Long)
