@@ -48,6 +48,9 @@ class CourtUseCase(
         try {
             log.info("CourtUseCase.updateCourt - Start - courtId : $courtId , updateCourtInputPort : $updateCourtInputPort")
             val courtPort = courtRepositoryOutput.findCourtByIdOrThrow(courtId)
+            if (updateCourtInputPort.localId != null) {
+                localRepositoryOutput.findLocalByIdOrThrow(updateCourtInputPort.localId!!)
+            }
             val response = courtRepositoryOutput.updateCourt(updateCourtInputPort.toPort(courtPort))
 
             log.info("CourtUseCase.updateCourt - End - response : $response")
