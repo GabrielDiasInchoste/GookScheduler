@@ -97,7 +97,7 @@ class BuilderTest {
 
     val schedulerEntity = SchedulerEntity(
         id = 1,
-        customerId = "03345585524",
+        customerEmail = "03345585524",
         status = SchedulerStatus.REQUESTED,
         court = courtEntity,
         cancel = cancelEntity,
@@ -109,7 +109,7 @@ class BuilderTest {
 
     val schedulerOutputPort = SchedulerOutputPort(
         id = 1,
-        customerId = "03345585524",
+        customerEmail = "03345585524",
         status = SchedulerStatusPort.REQUESTED,
         court = courtOutputPort,
         cancel = cancelOutputPort,

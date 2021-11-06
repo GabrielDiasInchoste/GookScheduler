@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank
 
 data class SchedulerRequest(
     @NotBlank(message = "Customer Id not informed")
-    val customerId: String,
+    val customerEmail: String,
 
     @NotBlank(message = "Court Id not informed")
     val courtId: Long,

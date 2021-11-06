@@ -1,8 +1,10 @@
 package com.br.gook.scheduler
 
 import com.br.gook.data.input.ConfirmSchedulerInputPort
+import com.br.gook.data.input.PageSchedulerInputPort
 import com.br.gook.data.input.SchedulerInputPort
 import com.br.gook.data.input.UpdateSchedulerInputPort
+import com.br.gook.data.output.PageSchedulerResponseOutputPort
 import com.br.gook.data.output.SchedulerOutputPort
 import com.br.gook.mappers.toOutputPort
 import com.br.gook.mappers.toPort
@@ -10,6 +12,7 @@ import com.br.gook.port.input.SchedulerUseCaseInput
 import com.br.gook.port.output.CourtRepositoryOutput
 import com.br.gook.port.output.SchedulerRepositoryOutput
 import org.jboss.logging.Logger
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Component
 
 @Component
@@ -25,6 +28,26 @@ class SchedulerUseCase(
             log.info("SchedulerUseCase.findScheduler - Start - schedulerId : $schedulerId")
             val response = schedulerRepositoryOutput.findSchedulerByIdOrThrow(schedulerId)
             log.info("SchedulerUseCase.findScheduler - End - response : $response")
+
+            return response
+        } catch (ex: Exception) {
+            log.error("SchedulerUseCase.findScheduler - Error to Find Scheduler - Error : ${ex.message}", ex)
+            throw ex
+        }
+    }
+
+    override fun findAllSchedulerWithPaginate(
+        pageRequest: PageRequest,
+        pageSchedulerInputPort: PageSchedulerInputPort
+    ): PageSchedulerResponseOutputPort {
+        try {
+            log.info("SchedulerUseCase.findAllSchedulerWithPaginate - Start - schedulerId : ")
+
+            val response = schedulerRepositoryOutput.findAllSchedulerWithPaginate(
+                pageRequest,
+                pageSchedulerInputPort.toOutputPort()
+            )
+            log.info("SchedulerUseCase.findAllSchedulerWithPaginate - End - response : $response")
 
             return response
         } catch (ex: Exception) {

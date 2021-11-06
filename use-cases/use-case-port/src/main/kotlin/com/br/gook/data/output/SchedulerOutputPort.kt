@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 
 data class SchedulerOutputPort(
     val id: Long?,
-    val customerId: String,
+    val customerEmail: String,
     val status: SchedulerStatusPort,
     val court: CourtOutputPort,
     val cancel: CancelOutputPort?,

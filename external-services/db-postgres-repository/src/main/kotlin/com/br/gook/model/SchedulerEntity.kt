@@ -13,8 +13,8 @@ data class SchedulerEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
 
-    @Column(name = "CUSTOMER_ID")
-    val customerId: String,
+    @Column(name = "CUSTOMER_EMAIL")
+    val customerEmail: String,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")

@@ -91,7 +91,7 @@ fun UpdateLocalRequest.toPort(): UpdateLocalInputPort {
 
 fun SchedulerRequest.toPort(): SchedulerInputPort {
     return SchedulerInputPort(
-        customerId = customerId,
+        customerEmail = customerEmail,
         courtId = courtId,
         schedule = schedule
     )
@@ -123,7 +123,7 @@ fun UpdateCancelRequest.toPort(): UpdateCancelInputPort {
 fun SchedulerOutputPort.toResponse(): SchedulerResponse {
     return SchedulerResponse(
         id = id!!,
-        customerId = customerId,
+        customerEmail = customerEmail,
         status = status,
         court = court.toResponse(),
         cancel = cancel?.toResponse(),
@@ -142,3 +142,23 @@ fun UpdateSchedulerRequest.toPort(): UpdateSchedulerInputPort {
     )
 }
 
+fun PageSchedulerRequest.toPort(): PageSchedulerInputPort {
+    return PageSchedulerInputPort(
+        customerEmail = customerEmail,
+        courtId = courtId,
+        status = status,
+    )
+}
+
+fun PageSchedulerResponseOutputPort.toResponse(): PageSchedulerResponse {
+    return PageSchedulerResponse(
+        number = number,
+        numberOfElements = numberOfElements,
+        size = size,
+        totalPages = totalPages,
+        totalElements = totalElements,
+        first = first,
+        last = last,
+        schedulers = schedulers.map { it.toResponse() }
+    )
+}

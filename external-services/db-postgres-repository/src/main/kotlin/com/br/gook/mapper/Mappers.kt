@@ -4,6 +4,7 @@ import com.br.gook.SchedulerStatus
 import com.br.gook.data.SchedulerStatusPort
 import com.br.gook.data.output.*
 import com.br.gook.model.*
+import org.springframework.data.domain.Page
 
 fun AddressOutputPort.toEntity(): AddressEntity {
     return AddressEntity(
@@ -100,7 +101,7 @@ fun LocalEntity.toPort(): LocalOutputPort {
 fun SchedulerOutputPort.toEntity(): SchedulerEntity {
     return SchedulerEntity(
         id = id ?: 0,
-        customerId = customerId,
+        customerEmail = customerEmail,
         status = status.toEntity(),
         court = court.toEntity(),
         cancel = cancel?.toEntity(),
@@ -114,7 +115,7 @@ fun SchedulerOutputPort.toEntity(): SchedulerEntity {
 fun SchedulerEntity.toPort(): SchedulerOutputPort {
     return SchedulerOutputPort(
         id = id,
-        customerId = customerId,
+        customerEmail = customerEmail,
         status = status.toPort(),
         court = court.toPort(),
         cancel = cancel?.toPort(),
@@ -141,4 +142,17 @@ fun SchedulerStatusPort.toEntity(): SchedulerStatus {
         SchedulerStatusPort.CANCEL_REQUESTED -> SchedulerStatus.CANCEL_REQUESTED
         else -> SchedulerStatus.REQUESTED
     }
+}
+
+fun Page<SchedulerEntity>.toPort(): PageSchedulerResponseOutputPort {
+    return PageSchedulerResponseOutputPort(
+        number = number,
+        numberOfElements = numberOfElements,
+        size = size,
+        totalPages = totalPages,
+        totalElements = totalElements,
+        first = isFirst,
+        last = isLast,
+        schedulers = content.map { it.toPort() }
+    )
 }

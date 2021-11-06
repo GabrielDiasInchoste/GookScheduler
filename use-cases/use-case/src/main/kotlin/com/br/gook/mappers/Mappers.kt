@@ -100,7 +100,7 @@ fun UpdateCancelInputPort.toPort(cancel: CancelOutputPort): CancelOutputPort {
 fun SchedulerInputPort.toOutputPort(courtOutputPort: CourtOutputPort): SchedulerOutputPort {
     return SchedulerOutputPort(
         id = null,
-        customerId = customerId,
+        customerEmail = customerEmail,
         status = SchedulerStatusPort.REQUESTED,
         court = courtOutputPort,
         cancel = null,
@@ -114,7 +114,7 @@ fun SchedulerInputPort.toOutputPort(courtOutputPort: CourtOutputPort): Scheduler
 fun UpdateSchedulerInputPort.toPort(scheduler: SchedulerOutputPort): SchedulerOutputPort {
     return SchedulerOutputPort(
         id = scheduler.id,
-        customerId = scheduler.customerId,
+        customerEmail = scheduler.customerEmail,
         status = status ?: scheduler.status,
         court = scheduler.court,
         cancel = scheduler.cancel,
@@ -127,7 +127,7 @@ fun UpdateSchedulerInputPort.toPort(scheduler: SchedulerOutputPort): SchedulerOu
 fun ConfirmSchedulerInputPort.toOutputPort(scheduler: SchedulerOutputPort): SchedulerOutputPort {
     return SchedulerOutputPort(
         id = scheduler.id,
-        customerId = scheduler.customerId,
+        customerEmail = scheduler.customerEmail,
         status = SchedulerStatusPort.CONFIRMED,
         court = scheduler.court,
         cancel = scheduler.cancel,
@@ -135,5 +135,13 @@ fun ConfirmSchedulerInputPort.toOutputPort(scheduler: SchedulerOutputPort): Sche
         confirmDate = LocalDateTime.now(),
         createDate = scheduler.createDate,
         lasModifiedDate = LocalDateTime.now()
+    )
+}
+
+fun PageSchedulerInputPort.toOutputPort(): PageSchedulerOutputPort {
+    return PageSchedulerOutputPort(
+        customerEmail = customerEmail,
+        courtId = courtId,
+        status = status,
     )
 }

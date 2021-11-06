@@ -3,7 +3,7 @@ package com.br.gook.dto.response
 import java.time.LocalDateTime
 
 data class UpdateSchedulerPort(
-    val customerId: String,
+    val customerEmail: String,
     val local: LocalResponse,
     val cancel: CancelResponse?,
     val confirmDate: LocalDateTime,
