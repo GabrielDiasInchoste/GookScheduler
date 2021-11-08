@@ -42,16 +42,21 @@ class SchedulerController(
         @RequestParam(value = "page", defaultValue = "0") page: Int,
         @RequestParam(value = "linesPerPage", defaultValue = "10") linesPage: Int,
         @RequestParam(value = "sort", defaultValue = "DESC") sort: String?,
-        @RequestParam(value = "customerEmail", defaultValue = "") customerEmail: String?,
-        @RequestParam(value = "courtId", defaultValue = "") courtId: Long?,
-        @RequestParam(value = "status", defaultValue = "") status: SchedulerStatusPort?,
+        @RequestParam(value = "customerEmail") customerEmail: String?,
+        @RequestParam(value = "courtId") courtId: Long?,
+        @RequestParam(value = "status") status: SchedulerStatusPort?,
 
         ): ResponseEntity<PageSchedulerResponse> {
+
         return ResponseEntity.status(HttpStatus.OK)
             .contentType(MediaType.APPLICATION_JSON)
             .body(
                 schedulerUseCaseInput.findAllSchedulerWithPaginate(
-                    PageRequest.of(page, linesPage, if (sort == "ASC") Sort.Direction.ASC else Sort.Direction.DESC),
+                    PageRequest.of(
+                        page,
+                        linesPage,
+                        if (sort == "ASC") Sort.by("id").ascending() else Sort.by("id").descending()
+                    ),
                     PageSchedulerRequest(
                         customerEmail = customerEmail,
                         courtId = courtId,
