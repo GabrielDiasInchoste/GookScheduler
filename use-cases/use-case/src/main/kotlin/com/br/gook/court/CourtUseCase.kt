@@ -1,14 +1,17 @@
 package com.br.gook.court
 
 import com.br.gook.data.input.CourtInputPort
+import com.br.gook.data.input.PageCourtInputPort
 import com.br.gook.data.input.UpdateCourtInputPort
 import com.br.gook.data.output.CourtOutputPort
+import com.br.gook.data.output.PageCourtResponseOutputPort
 import com.br.gook.mappers.toOutputPort
 import com.br.gook.mappers.toPort
 import com.br.gook.port.input.CourtUseCaseInput
 import com.br.gook.port.output.CourtRepositoryOutput
 import com.br.gook.port.output.LocalRepositoryOutput
 import org.jboss.logging.Logger
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Component
 
 @Component
@@ -68,6 +71,26 @@ class CourtUseCase(
             log.info("CourtUseCase.deleteCourt - End - response : $response")
         } catch (ex: Exception) {
             log.error("CourtUseCase.deleteCourt - Error to Create Court - Error : ${ex.message}", ex)
+            throw ex
+        }
+    }
+
+    override fun findAllCourtWithPaginate(
+        pageRequest: PageRequest,
+        pageCourtInputPort: PageCourtInputPort
+    ): PageCourtResponseOutputPort {
+        try {
+            log.info("LocalUseCase.findAllCourtWithPaginate - Start - pageRequest :$pageRequest ,pageCourtInputPort: $pageCourtInputPort")
+
+            val response = courtRepositoryOutput.findAllCourtWithPaginate(
+                pageRequest,
+                pageCourtInputPort.toOutputPort()
+            )
+            log.info("LocalUseCase.findAllCourtWithPaginate - End - response : $response")
+
+            return response
+        } catch (ex: Exception) {
+            log.error("LocalUseCase.findAllCourtWithPaginate - Error to Find Local - Error : ${ex.message}", ex)
             throw ex
         }
     }

@@ -1,5 +1,6 @@
 package com.br.gook.model
 
+import com.br.gook.CourtType
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -18,8 +19,9 @@ data class CourtEntity(
     @Column(name = "LOCAL_ID")
     val localId: Long,
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "TYPE")
-    val type: String,
+    val type: CourtType,
 
     @Column(name = "DESCRIPTION")
     val description: String,

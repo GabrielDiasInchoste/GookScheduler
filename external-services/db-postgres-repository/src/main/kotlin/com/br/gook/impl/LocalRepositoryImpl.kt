@@ -1,12 +1,17 @@
 package com.br.gook.impl
 
 import com.br.gook.data.output.LocalOutputPort
+import com.br.gook.data.output.PageLocalOutputPort
+import com.br.gook.data.output.PageLocalResponseOutputPort
 import com.br.gook.port.output.LocalRepositoryOutput
 import com.br.gook.repository.LocalRepository
 import com.br.gook.mapper.toEntity
 import com.br.gook.mapper.toPort
+import com.br.gook.specification.SpecificationLocalByFilter
+import com.br.gook.specification.SpecificationSchedulerByFilter
 import org.jboss.logging.Logger
 import org.springframework.context.annotation.Lazy
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 
 @Service
@@ -39,5 +44,15 @@ class LocalRepositoryImpl(
     override fun deleteLocal(localId: Long) {
         val localPort = findLocalByIdOrThrow(localId)
         localRepository.delete(localPort.toEntity())
+    }
+
+    override fun findAllLocalWithPaginate(
+        pageRequest: PageRequest,
+        pageLocalOutputPort: PageLocalOutputPort
+    ): PageLocalResponseOutputPort {
+        return localRepository.findAll(
+            SpecificationLocalByFilter().findOrderByCriteria(pageLocalOutputPort),
+            pageRequest
+        ).toPort()
     }
 }

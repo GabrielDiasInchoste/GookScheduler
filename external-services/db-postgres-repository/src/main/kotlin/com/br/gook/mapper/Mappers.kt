@@ -1,6 +1,8 @@
 package com.br.gook.mapper
 
+import com.br.gook.CourtType
 import com.br.gook.SchedulerStatus
+import com.br.gook.data.CourtTypePort
 import com.br.gook.data.SchedulerStatusPort
 import com.br.gook.data.output.*
 import com.br.gook.model.*
@@ -56,7 +58,7 @@ fun CourtOutputPort.toEntity(): CourtEntity {
     return CourtEntity(
         id = id ?: 0,
         name = name,
-        type = type,
+        type = type.toEntity(),
         description = description,
         localId = localId,
         createDate = createDate,
@@ -68,7 +70,7 @@ fun CourtEntity.toPort(): CourtOutputPort {
     return CourtOutputPort(
         id = id,
         name = name,
-        type = type,
+        type = type.toPort(),
         description = description,
         localId = localId,
         createDate = createDate,
@@ -144,6 +146,20 @@ fun SchedulerStatusPort.toEntity(): SchedulerStatus {
     }
 }
 
+fun CourtTypePort.toEntity(): CourtType {
+    return when (this) {
+        CourtTypePort.FUTSAL -> CourtType.FUTSAL
+        CourtTypePort.SOCIETY -> CourtType.SOCIETY
+    }
+}
+
+fun CourtType.toPort(): CourtTypePort {
+    return when (this) {
+        CourtType.FUTSAL -> CourtTypePort.FUTSAL
+        CourtType.SOCIETY -> CourtTypePort.SOCIETY
+    }
+}
+
 fun Page<SchedulerEntity>.toPort(): PageSchedulerResponseOutputPort {
     return PageSchedulerResponseOutputPort(
         number = number,
@@ -154,5 +170,31 @@ fun Page<SchedulerEntity>.toPort(): PageSchedulerResponseOutputPort {
         first = isFirst,
         last = isLast,
         schedulers = content.map { it.toPort() }
+    )
+}
+
+fun Page<LocalEntity>.toPort(): PageLocalResponseOutputPort {
+    return PageLocalResponseOutputPort(
+        number = number,
+        numberOfElements = numberOfElements,
+        size = size,
+        totalPages = totalPages,
+        totalElements = totalElements,
+        first = isFirst,
+        last = isLast,
+        locals = content.map { it.toPort() }
+    )
+}
+
+fun Page<CourtEntity>.toPort(): PageCourtResponseOutputPort {
+    return PageCourtResponseOutputPort(
+        number = number,
+        numberOfElements = numberOfElements,
+        size = size,
+        totalPages = totalPages,
+        totalElements = totalElements,
+        first = isFirst,
+        last = isLast,
+        courts = content.map { it.toPort() }
     )
 }

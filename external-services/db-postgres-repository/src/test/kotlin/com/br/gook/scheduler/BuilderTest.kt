@@ -1,6 +1,8 @@
 package com.br.gook.scheduler
 
+import com.br.gook.CourtType
 import com.br.gook.SchedulerStatus
+import com.br.gook.data.CourtTypePort
 import com.br.gook.data.SchedulerStatusPort
 import com.br.gook.data.output.*
 import com.br.gook.model.*
@@ -57,7 +59,7 @@ class BuilderTest {
     val courtEntity = CourtEntity(
         id = 1,
         name = "Arena de futsal",
-        type = "futsal",
+        type = CourtType.FUTSAL,
         description = "Tamano 150m quadrados",
         localId = 1,
         createDate = LocalDateTime.of(2021, 10, 14, 15, 11),
@@ -68,7 +70,7 @@ class BuilderTest {
     val courtOutputPort = CourtOutputPort(
         id = 1,
         name = "Arena de futsal",
-        type = "futsal",
+        type = CourtTypePort.FUTSAL,
         description = "Tamano 150m quadrados",
         localId = 1,
         createDate = LocalDateTime.of(2021, 10, 14, 15, 11),

@@ -146,7 +146,21 @@ fun PageSchedulerRequest.toPort(): PageSchedulerInputPort {
     return PageSchedulerInputPort(
         customerEmail = customerEmail,
         courtId = courtId,
-        status = status,
+        status = status
+    )
+}
+
+fun PageLocalRequest.toPort(): PageLocalInputPort {
+    return PageLocalInputPort(
+        addressId = addressId,
+        courtId = courtId
+    )
+}
+
+fun PageCourtRequest.toPort(): PageCourtInputPort {
+    return PageCourtInputPort(
+        localId = localId,
+        type = type
     )
 }
 
@@ -160,5 +174,31 @@ fun PageSchedulerResponseOutputPort.toResponse(): PageSchedulerResponse {
         first = first,
         last = last,
         schedulers = schedulers.map { it.toResponse() }
+    )
+}
+
+fun PageLocalResponseOutputPort.toResponse(): PageLocalResponse {
+    return PageLocalResponse(
+        number = number,
+        numberOfElements = numberOfElements,
+        size = size,
+        totalPages = totalPages,
+        totalElements = totalElements,
+        first = first,
+        last = last,
+        locals = locals.map { it.toResponse() }
+    )
+}
+
+fun PageCourtResponseOutputPort.toResponse(): PageCourtResponse {
+    return PageCourtResponse(
+        number = number,
+        numberOfElements = numberOfElements,
+        size = size,
+        totalPages = totalPages,
+        totalElements = totalElements,
+        first = first,
+        last = last,
+        courts = courts.map { it.toResponse() }
     )
 }

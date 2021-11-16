@@ -14,7 +14,6 @@ class SpecificationSchedulerByFilter {
     private val CUSTOMER_EMAIL = "customerEmail"
     private val STATUS = "status"
 
-
     fun findOrderByCriteria(request: PageSchedulerOutputPort): Specification<SchedulerEntity?> =
         Specification<SchedulerEntity?> { root, _, cb ->
             val predicates: MutableList<Predicate> = mutableListOf()

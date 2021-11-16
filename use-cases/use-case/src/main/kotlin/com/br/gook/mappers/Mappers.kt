@@ -124,6 +124,7 @@ fun UpdateSchedulerInputPort.toPort(scheduler: SchedulerOutputPort): SchedulerOu
         lasModifiedDate = LocalDateTime.now()
     )
 }
+
 fun ConfirmSchedulerInputPort.toOutputPort(scheduler: SchedulerOutputPort): SchedulerOutputPort {
     return SchedulerOutputPort(
         id = scheduler.id,
@@ -143,5 +144,19 @@ fun PageSchedulerInputPort.toOutputPort(): PageSchedulerOutputPort {
         customerEmail = customerEmail,
         courtId = courtId,
         status = status,
+    )
+}
+
+fun PageLocalInputPort.toOutputPort(): PageLocalOutputPort {
+    return PageLocalOutputPort(
+        addressId = addressId,
+        courtId = courtId
+    )
+}
+
+fun PageCourtInputPort.toOutputPort(): PageCourtOutputPort {
+    return PageCourtOutputPort(
+        localId = localId,
+        type = type
     )
 }

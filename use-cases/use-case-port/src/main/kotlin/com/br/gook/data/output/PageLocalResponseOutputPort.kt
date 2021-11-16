@@ -1,6 +1,6 @@
 package com.br.gook.data.output
 
-data class PageSchedulerResponseOutputPort(
+data class PageLocalResponseOutputPort(
     val number: Int,
     val numberOfElements: Int,
     val size: Int,
@@ -8,5 +8,5 @@ data class PageSchedulerResponseOutputPort(
     val totalElements: Long,
     val first: Boolean,
     val last: Boolean,
-    val schedulers: List<SchedulerOutputPort>
+    val locals: List<LocalOutputPort>
 )

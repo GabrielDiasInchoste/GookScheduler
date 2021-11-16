@@ -1,5 +1,6 @@
 package com.br.gook.dto.request
 
+import com.br.gook.data.CourtTypePort
 import javax.validation.constraints.NotBlank
 
 data class CourtRequest(
@@ -8,7 +9,7 @@ data class CourtRequest(
     val name: String,
 
     @NotBlank(message = "Type not informed")
-    val type: String,
+    val type: CourtTypePort,
 
     @NotBlank(message = "Description not informed")
     val description: String,

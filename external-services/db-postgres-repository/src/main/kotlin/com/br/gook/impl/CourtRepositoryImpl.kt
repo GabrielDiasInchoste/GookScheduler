@@ -1,12 +1,16 @@
 package com.br.gook.impl
 
 import com.br.gook.data.output.CourtOutputPort
+import com.br.gook.data.output.PageCourtOutputPort
+import com.br.gook.data.output.PageCourtResponseOutputPort
 import com.br.gook.mapper.toEntity
 import com.br.gook.mapper.toPort
 import com.br.gook.port.output.CourtRepositoryOutput
 import com.br.gook.repository.CourtRepository
+import com.br.gook.specification.SpecificationCourtByFilter
 import org.jboss.logging.Logger
 import org.springframework.context.annotation.Lazy
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 
 @Service
@@ -39,5 +43,15 @@ class CourtRepositoryImpl(
     override fun deleteCourt(courtId: Long) {
         val courtPort = findCourtByIdOrThrow(courtId)
         courtRepository.delete(courtPort.toEntity())
+    }
+
+    override fun findAllCourtWithPaginate(
+        pageRequest: PageRequest,
+        pageCourtOutputPort: PageCourtOutputPort
+    ): PageCourtResponseOutputPort {
+        return courtRepository.findAll(
+            SpecificationCourtByFilter().findOrderByCriteria(pageCourtOutputPort),
+            pageRequest
+        ).toPort()
     }
 }
