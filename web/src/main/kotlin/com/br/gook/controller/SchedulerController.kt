@@ -23,12 +23,12 @@ import javax.validation.Valid
 import kotlin.ranges.CharRange.Companion.EMPTY
 
 @RestController
-@RequestMapping("/v1/scheduler/")
+@RequestMapping("/v1/scheduler")
 class SchedulerController(
     private val schedulerUseCaseInput: SchedulerUseCaseInput
 ) {
 
-    @GetMapping(value = ["{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @GetMapping(value = ["/{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getScheduler(
         @PathVariable(value = "schedulerId") schedulerId: Long
     ): ResponseEntity<SchedulerOutputPort> {
@@ -37,7 +37,7 @@ class SchedulerController(
             .body(schedulerUseCaseInput.findScheduler(schedulerId))
     }
 
-    @GetMapping(value = ["all/"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @GetMapping(value = ["/all"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getAllScheduler(
         @RequestParam(value = "page", defaultValue = "0") page: Int,
         @RequestParam(value = "linesPerPage", defaultValue = "10") linesPage: Int,
@@ -75,7 +75,7 @@ class SchedulerController(
             .body(schedulerUseCaseInput.createScheduler(schedulerRequest.toPort()).toResponse())
     }
 
-    @PostMapping(value = ["confirm/{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @PostMapping(value = ["/confirm/{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun confirmScheduler(
         @PathVariable(value = "schedulerId") schedulerId: Long
     ): ResponseEntity<SchedulerResponse> {
@@ -84,7 +84,7 @@ class SchedulerController(
             .body(schedulerUseCaseInput.confirmScheduler(ConfirmSchedulerInputPort(schedulerId)).toResponse())
     }
 
-    @PutMapping(value = ["{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @PutMapping(value = ["/{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun putScheduler(
         @PathVariable(value = "schedulerId") schedulerId: Long,
         @RequestBody @Valid updateSchedulerRequest: UpdateSchedulerRequest
