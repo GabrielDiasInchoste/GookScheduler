@@ -24,6 +24,12 @@ data class AddressEntity(
     @Column(name = "CEP")
     val cep: String,
 
+    @Column(name = "LATITUDE")
+    val latitude: String,
+
+    @Column(name = "LONGITUDE")
+    val longitude: String,
+
     @Column(name = "CREATE_DATE")
     val createDate: LocalDateTime = LocalDateTime.now(),
 

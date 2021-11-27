@@ -12,6 +12,8 @@ fun AddressInputPort.toOutputPort(): AddressOutputPort {
         number = number,
         description = description,
         cep = cep,
+        latitude = latitude,
+        longitude = longitude,
         createDate = LocalDateTime.now(),
         lasModifiedDate = LocalDateTime.now()
     )
@@ -24,6 +26,8 @@ fun UpdateAddressInputPort.toPort(address: AddressOutputPort): AddressOutputPort
         number = number ?: address.number,
         description = description ?: address.description,
         cep = cep ?: address.cep,
+        latitude = latitude ?: address.latitude,
+        longitude = longitude ?: address.longitude,
         createDate = address.createDate,
         lasModifiedDate = LocalDateTime.now()
     )

@@ -4,5 +4,7 @@ data class UpdateAddressInputPort(
     val name: String?,
     val number: Int?,
     val description: String?,
-    val cep: String?
+    val cep: String?,
+    val latitude: String?,
+    val longitude: String?,
 )

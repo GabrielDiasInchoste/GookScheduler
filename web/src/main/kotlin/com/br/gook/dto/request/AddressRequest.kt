@@ -13,5 +13,11 @@ data class AddressRequest(
     val description: String,
 
     @NotBlank(message = "CEP not informed")
-    val cep: String
+    val cep: String,
+
+    @NotBlank(message = "Latitude not informed")
+    val latitude: String,
+
+    @NotBlank(message = "Longitude not informed")
+    val longitude: String
 )

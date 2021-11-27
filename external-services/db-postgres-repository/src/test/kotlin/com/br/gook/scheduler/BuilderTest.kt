@@ -21,6 +21,8 @@ class BuilderTest {
         number = 626,
         description = "Esquina",
         cep = "99050-510",
+        latitude = "-52.388125147184645",
+        longitude = "-28.24638768257886",
         createDate = LocalDateTime.of(2021, 10, 14, 15, 11),
         lasModifiedDate = LocalDateTime.of(2021, 10, 14, 15, 11),
     )
@@ -31,6 +33,8 @@ class BuilderTest {
         number = 626,
         description = "Esquina",
         cep = "99050-510",
+        latitude = "-52.388125147184645",
+        longitude = "-28.24638768257886",
         createDate = LocalDateTime.of(2021, 10, 14, 15, 11),
         lasModifiedDate = LocalDateTime.of(2021, 10, 14, 15, 11)
     )

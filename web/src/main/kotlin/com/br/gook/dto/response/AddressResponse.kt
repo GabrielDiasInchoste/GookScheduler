@@ -9,5 +9,7 @@ data class AddressResponse(
     val description: String,
     val cep: String,
     val createDate: LocalDateTime,
+    val latitude: String,
+    val longitude: String,
     val lasModifiedDate: LocalDateTime
 )

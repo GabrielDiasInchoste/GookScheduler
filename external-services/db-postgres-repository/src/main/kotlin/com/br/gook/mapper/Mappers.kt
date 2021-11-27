@@ -15,6 +15,8 @@ fun AddressOutputPort.toEntity(): AddressEntity {
         number = number,
         description = description,
         cep = cep,
+        latitude = latitude,
+        longitude = longitude,
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
@@ -27,6 +29,8 @@ fun AddressEntity.toPort(): AddressOutputPort {
         number = number,
         description = description,
         cep = cep,
+        latitude = latitude,
+        longitude = longitude,
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )

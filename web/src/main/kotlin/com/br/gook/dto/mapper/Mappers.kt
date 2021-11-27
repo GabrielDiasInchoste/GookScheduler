@@ -12,6 +12,8 @@ fun AddressOutputPort.toResponse(): AddressResponse {
         number = number,
         description = description,
         cep = cep,
+        latitude = latitude,
+        longitude = longitude,
         createDate = createDate,
         lasModifiedDate = lasModifiedDate
     )
@@ -23,6 +25,8 @@ fun AddressRequest.toPort(): AddressInputPort {
         number = number,
         description = description,
         cep = cep,
+        latitude = latitude,
+        longitude = longitude
     )
 }
 
@@ -32,6 +36,8 @@ fun UpdateAddressRequest.toPort(): UpdateAddressInputPort {
         number = number,
         description = description,
         cep = cep,
+        latitude = latitude,
+        longitude = longitude
     )
 }
 
