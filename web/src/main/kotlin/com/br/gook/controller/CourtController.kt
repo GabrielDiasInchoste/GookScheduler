@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.annotation.Secured
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
@@ -59,6 +60,7 @@ class CourtController(
             )
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     fun postCourt(
         @RequestBody @Valid courtRequest: CourtRequest
@@ -68,6 +70,7 @@ class CourtController(
             .body(courtUseCaseInput.createCourt(courtRequest.toPort()).toResponse())
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping(value = ["{courtId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun putCourt(
         @PathVariable(value = "courtId") courtId: Long,
@@ -78,6 +81,7 @@ class CourtController(
             .body(courtUseCaseInput.updateCourt(courtId, updateCourtRequest.toPort()).toResponse())
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping(value = ["{courtId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun deleteCourt(
         @PathVariable(value = "courtId") courtId: Long

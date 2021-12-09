@@ -9,6 +9,7 @@ import com.br.gook.port.input.AddressUseCaseInput
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.annotation.Secured
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
@@ -27,6 +28,7 @@ class AddressController(
             .body(addressUseCaseInput.findAddress(addressId).toResponse())
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     fun postAddress(
         @RequestBody @Valid addressRequest: AddressRequest
@@ -36,6 +38,7 @@ class AddressController(
             .body(addressUseCaseInput.createAddress(addressRequest.toPort()).toResponse())
 }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping(value = ["{addressId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun putAddress(
         @PathVariable(value = "addressId") addressId: Long,
@@ -46,6 +49,7 @@ class AddressController(
             .body(addressUseCaseInput.updateAddress(addressId, updateAddressRequest.toPort()).toResponse())
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping(value = ["{addressId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun deleteAddress(
         @PathVariable(value = "addressId") addressId: Long

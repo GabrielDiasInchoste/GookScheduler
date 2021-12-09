@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.annotation.Secured
 import org.springframework.util.StringUtils
 import org.springframework.web.bind.annotation.*
 import javax.swing.text.SimpleAttributeSet.EMPTY
@@ -75,6 +76,7 @@ class SchedulerController(
             .body(schedulerUseCaseInput.createScheduler(schedulerRequest.toPort()).toResponse())
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping(value = ["/confirm/{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun confirmScheduler(
         @PathVariable(value = "schedulerId") schedulerId: Long
@@ -84,6 +86,7 @@ class SchedulerController(
             .body(schedulerUseCaseInput.confirmScheduler(ConfirmSchedulerInputPort(schedulerId)).toResponse())
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping(value = ["/{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun putScheduler(
         @PathVariable(value = "schedulerId") schedulerId: Long,

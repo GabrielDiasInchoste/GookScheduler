@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.annotation.Secured
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
@@ -57,6 +58,7 @@ class LocalController(
             )
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     fun postLocal(
         @RequestBody @Valid localRequest: LocalRequest
@@ -66,6 +68,7 @@ class LocalController(
             .body(localUseCaseInput.createLocal(localRequest.toPort()).toResponse())
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping(value = ["/{localId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun putLocal(
         @PathVariable(value = "localId") localId: Long,
@@ -76,6 +79,7 @@ class LocalController(
             .body(localUseCaseInput.updateLocal(localId, updateLocalRequest.toPort()).toResponse())
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping(value = ["/{localId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun deleteLocal(
         @PathVariable(value = "localId") localId: Long

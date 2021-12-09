@@ -11,6 +11,7 @@ import com.br.gook.port.input.CancelUseCaseInput
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.annotation.Secured
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
@@ -30,6 +31,7 @@ class CancelController(
             .body(cancelUseCaseInput.requestCancel(schedulerId, cancelRequest.toPort()).toResponse())
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping(value = ["{cancelId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun putCancel(
         @PathVariable(value = "cancelId") cancelId: Long,
@@ -40,6 +42,7 @@ class CancelController(
             .body(cancelUseCaseInput.updateCancel(cancelId, updateCancelRequest.toPort()).toResponse())
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping(value = ["confirm/schedulerId/{schedulerId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun confirmScheduler(
         @PathVariable(value = "schedulerId") schedulerId: Long,
