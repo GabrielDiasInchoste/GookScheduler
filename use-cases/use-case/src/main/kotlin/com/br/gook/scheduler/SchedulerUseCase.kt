@@ -10,6 +10,7 @@ import com.br.gook.mappers.toOutputPort
 import com.br.gook.mappers.toPort
 import com.br.gook.port.input.SchedulerUseCaseInput
 import com.br.gook.port.output.CourtRepositoryOutput
+import com.br.gook.port.output.FirebaseNotificationServiceOutput
 import com.br.gook.port.output.SchedulerRepositoryOutput
 import org.jboss.logging.Logger
 import org.springframework.data.domain.PageRequest
@@ -18,7 +19,8 @@ import org.springframework.stereotype.Component
 @Component
 class SchedulerUseCase(
     val schedulerRepositoryOutput: SchedulerRepositoryOutput,
-    val courtRepositoryOutput: CourtRepositoryOutput
+    val courtRepositoryOutput: CourtRepositoryOutput,
+    val firebaseNotificationServiceOutput: FirebaseNotificationServiceOutput
 ) : SchedulerUseCaseInput {
 
     private val log = Logger.getLogger(javaClass)
@@ -77,6 +79,7 @@ class SchedulerUseCase(
                 schedulerRepositoryOutput.findSchedulerByIdOrThrow(confirmSchedulerInputPort.schedulerId)
             val response =
                 schedulerRepositoryOutput.updateScheduler(confirmSchedulerInputPort.toOutputPort(schedulerOutputPort))
+            firebaseNotificationServiceOutput.sendPush(response.tokenSendPush!!)
 
             log.info("SchedulerUseCase.confirmScheduler - End - response : $response")
             return response

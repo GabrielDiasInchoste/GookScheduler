@@ -6,5 +6,6 @@ dependencies {
     implementation project(":use-cases:use-case")
     implementation project(":use-cases:use-case-port")
     implementation project(":external-services:db-postgres-repository")
+    implementation project(":external-services:firebase-push-notification")
     implementation project(":web")
 }

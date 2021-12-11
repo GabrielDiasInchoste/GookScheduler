@@ -105,6 +105,7 @@ fun SchedulerInputPort.toOutputPort(courtOutputPort: CourtOutputPort): Scheduler
     return SchedulerOutputPort(
         id = null,
         customerEmail = customerEmail,
+        tokenSendPush = tokenSendPush,
         status = SchedulerStatusPort.REQUESTED,
         court = courtOutputPort,
         cancel = null,
@@ -119,6 +120,7 @@ fun UpdateSchedulerInputPort.toPort(scheduler: SchedulerOutputPort): SchedulerOu
     return SchedulerOutputPort(
         id = scheduler.id,
         customerEmail = scheduler.customerEmail,
+        tokenSendPush = tokenSendPush ?: scheduler.tokenSendPush,
         status = status ?: scheduler.status,
         court = scheduler.court,
         cancel = scheduler.cancel,
@@ -133,6 +135,7 @@ fun ConfirmSchedulerInputPort.toOutputPort(scheduler: SchedulerOutputPort): Sche
     return SchedulerOutputPort(
         id = scheduler.id,
         customerEmail = scheduler.customerEmail,
+        tokenSendPush = scheduler.tokenSendPush,
         status = SchedulerStatusPort.CONFIRMED,
         court = scheduler.court,
         cancel = scheduler.cancel,

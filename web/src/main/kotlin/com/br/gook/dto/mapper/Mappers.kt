@@ -97,6 +97,7 @@ fun UpdateLocalRequest.toPort(): UpdateLocalInputPort {
 
 fun SchedulerRequest.toPort(): SchedulerInputPort {
     return SchedulerInputPort(
+        tokenSendPush = tokenSendPush,
         customerEmail = customerEmail,
         courtId = courtId,
         schedule = schedule
@@ -131,6 +132,7 @@ fun SchedulerOutputPort.toResponse(): SchedulerResponse {
         id = id!!,
         customerEmail = customerEmail,
         status = status,
+        tokenSendPush = tokenSendPush,
         court = court.toResponse(),
         cancel = cancel?.toResponse(),
         schedule = schedule,
@@ -143,6 +145,7 @@ fun SchedulerOutputPort.toResponse(): SchedulerResponse {
 fun UpdateSchedulerRequest.toPort(): UpdateSchedulerInputPort {
     return UpdateSchedulerInputPort(
         cancel = cancel?.toPort(),
+        tokenSendPush=tokenSendPush,
         status = status,
         scheduleDate = scheduleDate
     )

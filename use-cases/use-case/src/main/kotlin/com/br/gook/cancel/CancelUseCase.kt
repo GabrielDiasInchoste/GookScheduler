@@ -10,6 +10,7 @@ import com.br.gook.mappers.toOutputPort
 import com.br.gook.mappers.toPort
 import com.br.gook.port.input.CancelUseCaseInput
 import com.br.gook.port.output.CancelRepositoryOutput
+import com.br.gook.port.output.FirebaseNotificationServiceOutput
 import com.br.gook.port.output.SchedulerRepositoryOutput
 import org.jboss.logging.Logger
 import org.springframework.stereotype.Component
@@ -18,7 +19,8 @@ import java.time.LocalDateTime
 @Component
 class CancelUseCase(
     val cancelRepositoryOutput: CancelRepositoryOutput,
-    val schedulerRepositoryOutput: SchedulerRepositoryOutput
+    val schedulerRepositoryOutput: SchedulerRepositoryOutput,
+    val firebaseNotificationServiceOutput: FirebaseNotificationServiceOutput
 ) : CancelUseCaseInput {
 
     private val log = Logger.getLogger(javaClass)
@@ -69,6 +71,7 @@ class CancelUseCase(
                         )
                     )
                 )
+                firebaseNotificationServiceOutput.sendPush(response.tokenSendPush!!)
                 log.info("CancelUseCase.confirmCancel - End - response : $response")
                 return response
             } else {

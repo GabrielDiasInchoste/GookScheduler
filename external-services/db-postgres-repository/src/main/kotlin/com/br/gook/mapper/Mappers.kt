@@ -108,6 +108,7 @@ fun SchedulerOutputPort.toEntity(): SchedulerEntity {
     return SchedulerEntity(
         id = id ?: 0,
         customerEmail = customerEmail,
+        tokenSendPush=tokenSendPush,
         status = status.toEntity(),
         court = court.toEntity(),
         cancel = cancel?.toEntity(),
@@ -122,6 +123,7 @@ fun SchedulerEntity.toPort(): SchedulerOutputPort {
     return SchedulerOutputPort(
         id = id,
         customerEmail = customerEmail,
+        tokenSendPush=tokenSendPush,
         status = status.toPort(),
         court = court.toPort(),
         cancel = cancel?.toPort(),

@@ -16,6 +16,9 @@ data class SchedulerEntity(
     @Column(name = "CUSTOMER_EMAIL")
     val customerEmail: String,
 
+    @Column(name = "TOKEN_SEND_PUSH")
+    val tokenSendPush: String?,
+
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
     val status: SchedulerStatus,
