@@ -76,13 +76,16 @@ class SchedulerUseCase(
                 schedulerRepositoryOutput.findSchedulerByIdOrThrow(confirmSchedulerInputPort.schedulerId)
             val response =
                 schedulerRepositoryOutput.updateScheduler(confirmSchedulerInputPort.toOutputPort(schedulerOutputPort))
-            firebaseNotificationServiceOutput.sendPush(
-                NotificationInputPort(
-                    response.tokenSendPush!!,
-                    "Solicitação de Agendamento Aprovado",
-                    "O local aprovou o agendamento solicitado"
+            if (response.tokenSendPush != null) {
+
+                firebaseNotificationServiceOutput.sendPush(
+                    NotificationInputPort(
+                        response.tokenSendPush!!,
+                        "Agendamento Aprovado",
+                        "O local aprovou o agendamento solicitado"
+                    )
                 )
-            )
+            }
 
             log.info("SchedulerUseCase.confirmScheduler - End - response : $response")
             return response

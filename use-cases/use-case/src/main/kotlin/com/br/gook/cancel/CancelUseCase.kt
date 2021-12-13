@@ -72,13 +72,15 @@ class CancelUseCase(
                         )
                     )
                 )
-                firebaseNotificationServiceOutput.sendPush(
-                    NotificationInputPort(
-                        response.tokenSendPush!!,
-                        "Solicitação de Cancelamento Aprovada",
-                        "O local aprovou o cancelamento solicitado"
+                if (response.tokenSendPush != null) {
+                    firebaseNotificationServiceOutput.sendPush(
+                        NotificationInputPort(
+                            response.tokenSendPush!!,
+                            "Cancelamento Aprovado",
+                            "O local aprovou o cancelamento solicitado"
+                        )
                     )
-                )
+                }
                 log.info("CancelUseCase.confirmCancel - End - response : $response")
                 return response
             } else {
