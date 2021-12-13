@@ -3,6 +3,7 @@ package com.br.gook.cancel
 import com.br.gook.data.SchedulerStatusPort
 import com.br.gook.data.input.CancelConfirmInputPort
 import com.br.gook.data.input.CancelInputPort
+import com.br.gook.data.input.NotificationInputPort
 import com.br.gook.data.input.UpdateCancelInputPort
 import com.br.gook.data.output.CancelOutputPort
 import com.br.gook.data.output.SchedulerOutputPort
@@ -71,7 +72,13 @@ class CancelUseCase(
                         )
                     )
                 )
-                firebaseNotificationServiceOutput.sendPush(response.tokenSendPush!!)
+                firebaseNotificationServiceOutput.sendPush(
+                    NotificationInputPort(
+                        response.tokenSendPush!!,
+                        "Solicitação de Cancelamento Aprovada",
+                        "O local aprovou o cancelamento solicitado"
+                    )
+                )
                 log.info("CancelUseCase.confirmCancel - End - response : $response")
                 return response
             } else {

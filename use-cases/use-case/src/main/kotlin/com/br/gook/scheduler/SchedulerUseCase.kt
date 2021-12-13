@@ -1,9 +1,6 @@
 package com.br.gook.scheduler
 
-import com.br.gook.data.input.ConfirmSchedulerInputPort
-import com.br.gook.data.input.PageSchedulerInputPort
-import com.br.gook.data.input.SchedulerInputPort
-import com.br.gook.data.input.UpdateSchedulerInputPort
+import com.br.gook.data.input.*
 import com.br.gook.data.output.PageSchedulerResponseOutputPort
 import com.br.gook.data.output.SchedulerOutputPort
 import com.br.gook.mappers.toOutputPort
@@ -79,7 +76,13 @@ class SchedulerUseCase(
                 schedulerRepositoryOutput.findSchedulerByIdOrThrow(confirmSchedulerInputPort.schedulerId)
             val response =
                 schedulerRepositoryOutput.updateScheduler(confirmSchedulerInputPort.toOutputPort(schedulerOutputPort))
-            firebaseNotificationServiceOutput.sendPush(response.tokenSendPush!!)
+            firebaseNotificationServiceOutput.sendPush(
+                NotificationInputPort(
+                    response.tokenSendPush!!,
+                    "Solicitação de Agendamento Aprovado",
+                    "O local aprovou o agendamento solicitado"
+                )
+            )
 
             log.info("SchedulerUseCase.confirmScheduler - End - response : $response")
             return response
