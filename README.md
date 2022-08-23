@@ -6,7 +6,7 @@ Projeto criado usando Java JDK 11 utilizando a linguagem de programação Kotlin
 
 Documentação da api feita com Swagger - Link Local: http://localhost:8080/swagger-ui.html.
 
-Arquitetudo do MicroServico é baseada na Clean Architecture segue documentação abaixe e imagem ilustrativa.
+Arquitetura do MicroServico é baseada na Clean Architecture, segue documentação abaixo e imagem ilustrativa.
 https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
 ![image](https://user-images.githubusercontent.com/14873537/137315296-dd9a0807-0d92-4309-81a3-c03d29c0e901.png)
